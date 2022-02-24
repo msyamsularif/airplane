@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+double defaultMargine = 24.0;
+double defaultRadius = 17.0;
+
 Color kPrimaryColor = const Color(0xFF5C40CC);
 Color kBlackColor = const Color(0xFF1F1449);
 Color kWhiteColor = const Color(0xFFFFFFFF);
