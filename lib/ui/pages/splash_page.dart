@@ -1,5 +1,6 @@
-import 'package:airplane/shared/theme.dart';
 import 'package:flutter/material.dart';
+
+import '../../shared/theme.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
