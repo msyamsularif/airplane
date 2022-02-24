@@ -145,7 +145,7 @@ class SignUpPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(defaultRadius),
               ),
             ),
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context, '/bonus'),
             child: Text(
               'Get Started',
               style: whiteTextStyle.copyWith(
@@ -183,10 +183,9 @@ class SignUpPage extends StatelessWidget {
         child: Text(
           'Terms and Conditions',
           style: greyTextStyle.copyWith(
-            fontSize: 16,
-            fontWeight: light,
-            decoration: TextDecoration.underline
-          ),
+              fontSize: 16,
+              fontWeight: light,
+              decoration: TextDecoration.underline),
         ),
       );
     }
@@ -196,7 +195,7 @@ class SignUpPage extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(
-            horizontal: defaultMargine,
+            horizontal: defaultMargin,
           ),
           children: [
             title(),
