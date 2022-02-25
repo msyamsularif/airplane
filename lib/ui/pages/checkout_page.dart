@@ -1,8 +1,8 @@
-import 'package:airplane/ui/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared/theme.dart';
 import '../widgets/booking_details_item.dart';
+import '../widgets/custom_button.dart';
 
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({Key? key}) : super(key: key);
@@ -290,7 +290,7 @@ class CheckoutPage extends StatelessWidget {
       return CustomBottom(
         title: 'Pay Now',
         margin: const EdgeInsets.only(top: 30),
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, '/success-checkout'),
       );
     }
 

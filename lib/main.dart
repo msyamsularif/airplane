@@ -8,6 +8,7 @@ import 'ui/pages/get_started_page.dart';
 import 'ui/pages/main_page.dart';
 import 'ui/pages/sign_up_page.dart';
 import 'ui/pages/splash_page.dart';
+import 'ui/pages/success_checkout_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +35,7 @@ class _MyAppState extends State<MyApp> {
         '/detail-destination': (context) => const DetailPage(),
         '/choose-seat': (context) => const ChooseSeatPage(),
         '/checkout': (context) => const CheckoutPage(),
+        '/success-checkout': (context) => const SuccessCheckoutPage(),
       },
     );
   }
