@@ -1,3 +1,4 @@
+import 'package:airplane/ui/widgets/destination_tile.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared/theme.dart';
@@ -98,10 +99,31 @@ class HomePage extends StatelessWidget {
       );
     }
 
+    Widget newDestinations() {
+      return Container(
+        margin:
+            EdgeInsets.only(top: 30, left: defaultMargin, right: defaultMargin),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'New This Year',
+              style: blackTextStyle.copyWith(
+                fontSize: 18,
+                fontWeight: semiBold,
+              ),
+            ),
+            DestinaitonTile(),
+          ],
+        ),
+      );
+    }
+
     return ListView(
       children: [
         header(),
         pupularDestination(),
+        newDestinations(),
       ],
     );
   }
