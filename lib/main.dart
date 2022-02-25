@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'ui/pages/bonus_page.dart';
+import 'ui/pages/checkout_page.dart';
 import 'ui/pages/choose_seat_page.dart';
 import 'ui/pages/detail_page.dart';
 import 'ui/pages/get_started_page.dart';
@@ -32,6 +33,7 @@ class _MyAppState extends State<MyApp> {
         '/main': (context) => const MainPage(),
         '/detail-destination': (context) => const DetailPage(),
         '/choose-seat': (context) => const ChooseSeatPage(),
+        '/checkout': (context) => const CheckoutPage(),
       },
     );
   }
