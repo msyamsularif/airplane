@@ -1,8 +1,20 @@
-import 'package:airplane/shared/theme.dart';
 import 'package:flutter/material.dart';
 
+import 'package:airplane/shared/theme.dart';
+
 class DestinaitonTile extends StatelessWidget {
-  const DestinaitonTile({Key? key}) : super(key: key);
+  final String name;
+  final String city;
+  final String imageUrl;
+  final double rating;
+
+  const DestinaitonTile({
+    Key? key,
+    required this.name,
+    required this.city,
+    required this.imageUrl,
+    this.rating = 0.0,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +32,9 @@ class DestinaitonTile extends StatelessWidget {
             height: 70,
             margin: const EdgeInsets.only(right: 16),
             decoration: BoxDecoration(
-              image: const DecorationImage(
+              image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage('assets/image_destination6.png'),
+                image: AssetImage(imageUrl),
               ),
               borderRadius: BorderRadius.circular(defaultRadius),
             ),
@@ -32,7 +44,7 @@ class DestinaitonTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Danau Beratan',
+                  name,
                   style: blackTextStyle.copyWith(
                     fontSize: 18,
                     fontWeight: medium,
@@ -40,7 +52,7 @@ class DestinaitonTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  'Singaraja',
+                  city,
                   style: greyTextStyle.copyWith(
                     fontWeight: light,
                   ),
@@ -62,7 +74,7 @@ class DestinaitonTile extends StatelessWidget {
                 ),
               ),
               Text(
-                '4.8',
+                rating.toString(),
                 style: blackTextStyle.copyWith(
                   fontWeight: medium,
                 ),
