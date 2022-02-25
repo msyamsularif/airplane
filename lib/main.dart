@@ -1,10 +1,11 @@
-import 'package:airplane/ui/pages/bonus_page.dart';
-import 'package:airplane/ui/pages/detail_page.dart';
-import 'package:airplane/ui/pages/get_started_page.dart';
-import 'package:airplane/ui/pages/main_page.dart';
-import 'package:airplane/ui/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
+import 'ui/pages/bonus_page.dart';
+import 'ui/pages/choose_seat_page.dart';
+import 'ui/pages/detail_page.dart';
+import 'ui/pages/get_started_page.dart';
+import 'ui/pages/main_page.dart';
+import 'ui/pages/sign_up_page.dart';
 import 'ui/pages/splash_page.dart';
 
 void main() {
@@ -30,6 +31,7 @@ class _MyAppState extends State<MyApp> {
         '/bonus': (context) => const BonusPage(),
         '/main': (context) => const MainPage(),
         '/detail-destination': (context) => const DetailPage(),
+        '/choose-seat': (context) => const ChooseSeatPage(),
       },
     );
   }

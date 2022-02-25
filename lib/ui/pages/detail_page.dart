@@ -240,7 +240,7 @@ class DetailPage extends StatelessWidget {
                   CustomBottom(
                     width: 170,
                     title: 'Book Now',
-                    onPressed: () {},
+                    onPressed: () => Navigator.pushNamed(context, '/choose-seat'),
                   ),
                 ],
               ),
