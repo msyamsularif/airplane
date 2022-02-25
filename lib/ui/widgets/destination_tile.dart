@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:airplane/shared/theme.dart';
+import '../../shared/theme.dart';
 
 class DestinaitonTile extends StatelessWidget {
   final String name;
@@ -18,70 +18,73 @@ class DestinaitonTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 16),
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: kWhiteColor,
-        borderRadius: BorderRadius.circular(defaultRadius),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 70,
-            height: 70,
-            margin: const EdgeInsets.only(right: 16),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(imageUrl),
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, '/detail-destination'),
+      child: Container(
+        margin: const EdgeInsets.only(top: 16),
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: kWhiteColor,
+          borderRadius: BorderRadius.circular(defaultRadius),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 70,
+              height: 70,
+              margin: const EdgeInsets.only(right: 16),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(imageUrl),
+                ),
+                borderRadius: BorderRadius.circular(defaultRadius),
               ),
-              borderRadius: BorderRadius.circular(defaultRadius),
             ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: blackTextStyle.copyWith(
+                      fontSize: 18,
+                      fontWeight: medium,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    city,
+                    style: greyTextStyle.copyWith(
+                      fontWeight: light,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  name,
-                  style: blackTextStyle.copyWith(
-                    fontSize: 18,
-                    fontWeight: medium,
+                Container(
+                  width: 20,
+                  height: 20,
+                  margin: const EdgeInsets.only(right: 5),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/icon_star.png'),
+                    ),
                   ),
                 ),
-                const SizedBox(height: 5),
                 Text(
-                  city,
-                  style: greyTextStyle.copyWith(
-                    fontWeight: light,
+                  rating.toString(),
+                  style: blackTextStyle.copyWith(
+                    fontWeight: medium,
                   ),
                 )
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 20,
-                height: 20,
-                margin: const EdgeInsets.only(right: 5),
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/icon_star.png'),
-                  ),
-                ),
-              ),
-              Text(
-                rating.toString(),
-                style: blackTextStyle.copyWith(
-                  fontWeight: medium,
-                ),
-              )
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
