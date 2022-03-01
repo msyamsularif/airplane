@@ -1,6 +1,7 @@
-import 'package:airplane/models/user_model.dart';
-import 'package:airplane/services/user_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../models/user_model.dart';
+import 'user_service.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -29,6 +30,14 @@ class AuthService {
       await UserService().setUser(user: user);
 
       return user;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
     } catch (e) {
       rethrow;
     }
