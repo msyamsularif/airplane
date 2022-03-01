@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import '../../shared/theme.dart';
 
 class CustomTextFormField extends StatelessWidget {
+  final TextEditingController controller;
   final String title;
   final String hintText;
   final bool obscureText;
+
   const CustomTextFormField({
     Key? key,
+    required this.controller,
     required this.title,
     required this.hintText,
     this.obscureText = false,
@@ -23,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
           Text(title),
           const SizedBox(height: 6),
           TextFormField(
+            controller: controller,
             cursorColor: kBlackColor,
             obscureText: obscureText,
             decoration: InputDecoration(
