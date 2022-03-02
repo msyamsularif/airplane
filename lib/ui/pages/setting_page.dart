@@ -15,8 +15,9 @@ class SettingPage extends StatelessWidget {
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthInitial) {
+            context.read<PageCubit>().setPage(0);
             Navigator.pushNamedAndRemoveUntil(
-                context, '/sign-up', (route) => false);
+                context, '/sign-in', (route) => false);
           } else if (state is AuthFailed) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -37,10 +38,7 @@ class SettingPage extends StatelessWidget {
           return CustomBottom(
             title: 'Sign Out',
             width: 220,
-            onPressed: () {
-              context.read<AuthCubit>().signOut();
-              context.read<PageCubit>().setPage(0);
-            },
+            onPressed: () => context.read<AuthCubit>().signOut(),
           );
         },
       ),

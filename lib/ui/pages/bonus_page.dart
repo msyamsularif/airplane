@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
+import '../../cubits/auth/auth_cubit.dart';
 import '../../shared/theme.dart';
 import '../widgets/custom_button.dart';
 
@@ -25,64 +28,78 @@ class BonusPage extends StatelessWidget {
             ),
           ],
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+        child: BlocBuilder<AuthCubit, AuthState>(
+          builder: (context, state) {
+            if (state is AuthSuccess) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
                     children: [
-                      Text(
-                        'Name',
-                        style: whiteTextStyle.copyWith(
-                          fontWeight: light,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Name',
+                              style: whiteTextStyle.copyWith(
+                                fontWeight: light,
+                              ),
+                            ),
+                            Text(
+                              state.user.name,
+                              style: whiteTextStyle.copyWith(
+                                fontSize: 20,
+                                fontWeight: medium,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: 24,
+                        height: 24,
+                        margin: const EdgeInsets.only(right: 6),
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/icon_plane.png'),
+                          ),
                         ),
                       ),
                       Text(
-                        'M Syamsul Arif',
+                        'Pay',
                         style: whiteTextStyle.copyWith(
-                          fontSize: 20,
+                          fontSize: 16,
                           fontWeight: medium,
                         ),
-                        overflow: TextOverflow.ellipsis,
                       )
                     ],
                   ),
-                ),
-                Container(
-                  width: 24,
-                  height: 24,
-                  margin: const EdgeInsets.only(right: 6),
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/icon_plane.png'),
+                  const Spacer(),
+                  Text(
+                    'Balance',
+                    style: whiteTextStyle.copyWith(fontWeight: light),
+                  ),
+                  Text(
+                    NumberFormat.currency(
+                      locale: 'id-ID',
+                      symbol: 'IDR ',
+                      decimalDigits: 0,
+                    ).format(
+                      state.user.balance,
                     ),
-                  ),
-                ),
-                Text(
-                  'Pay',
-                  style: whiteTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: medium,
-                  ),
-                )
-              ],
-            ),
-            const Spacer(),
-            Text(
-              'Balance',
-              style: whiteTextStyle.copyWith(fontWeight: light),
-            ),
-            Text(
-              'IDR 280.000.000',
-              style: whiteTextStyle.copyWith(
-                fontSize: 26,
-                fontWeight: medium,
-              ),
-            )
-          ],
+                    style: whiteTextStyle.copyWith(
+                      fontSize: 26,
+                      fontWeight: medium,
+                    ),
+                  )
+                ],
+              );
+            } else {
+              return const SizedBox();
+            }
+          },
         ),
       );
     }
@@ -119,7 +136,8 @@ class BonusPage extends StatelessWidget {
         title: 'Start Fly Now',
         width: 220,
         margin: const EdgeInsets.only(top: 50),
-        onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false),
+        onPressed: () => Navigator.pushNamedAndRemoveUntil(
+            context, '/main', (route) => false),
       );
     }
 
