@@ -41,8 +41,10 @@ class MainPage extends StatelessWidget {
           width: double.infinity,
           height: 60,
           decoration: BoxDecoration(
-              color: kWhiteColor,
-              borderRadius: BorderRadius.circular(defaultRadius)),
+            color: kWhiteColor,
+            border: Border.all(color: kBackgroundColor, width:3),
+            borderRadius: BorderRadius.circular(defaultRadius),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: const [
