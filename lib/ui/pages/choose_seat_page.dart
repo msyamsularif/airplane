@@ -1,3 +1,5 @@
+import 'package:airplane/models/transaction_model.dart';
+import 'package:airplane/ui/pages/checkout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -418,11 +420,30 @@ class ChooseSeatPage extends StatelessWidget {
     Widget checkoutButton() {
       return BlocBuilder<SeatCubit, List<String>>(
         builder: (context, state) {
+          int price = destination.price * state.length;
           return CustomBottom(
             title: 'Continue to Checkout',
             margin: const EdgeInsets.only(top: 30, bottom: 46),
             onPressed: state.isNotEmpty
-                ? () => Navigator.pushNamed(context, '/checkout')
+                ? () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) {
+                          return CheckoutPage(
+                            transaction: TransactionModel(
+                              destination: destination,
+                              amountOfTravelers: state.length,
+                              selectedSeats: state.join(', '),
+                              insurance: true,
+                              refundable: false,
+                              vit: 0.45,
+                              price: price,
+                              grandTotal: price + (price * 0.45).toInt(),
+                            ),
+                          );
+                        },
+                      ),
+                    )
                 : null,
           );
         },
