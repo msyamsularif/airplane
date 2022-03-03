@@ -1,3 +1,4 @@
+import 'package:airplane/ui/pages/choose_seat_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/destination_model.dart';
@@ -254,8 +255,14 @@ class DetailPage extends StatelessWidget {
                   CustomBottom(
                     width: 170,
                     title: 'Book Now',
-                    onPressed: () =>
-                        Navigator.pushNamed(context, '/choose-seat'),
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ChooseSeatPage(
+                          destination: destination,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

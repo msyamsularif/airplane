@@ -5,7 +5,7 @@ import '../../shared/theme.dart';
 class CustomBottom extends StatelessWidget {
   final String title;
   final double width;
-  final Function() onPressed;
+  final Function()? onPressed;
   final EdgeInsets margin;
 
   const CustomBottom({
@@ -24,7 +24,7 @@ class CustomBottom extends StatelessWidget {
       margin: margin,
       child: TextButton(
         style: TextButton.styleFrom(
-          backgroundColor: kPrimaryColor,
+          backgroundColor: onPressed != null ? kPrimaryColor : Colors.grey[400],
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(defaultRadius),
           ),

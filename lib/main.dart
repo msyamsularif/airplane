@@ -1,3 +1,4 @@
+import 'package:airplane/cubits/seat/seat_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,6 +44,9 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<DestinationCubit>(
           create: (context) => DestinationCubit()..fetchDestinations(),
         ),
+        BlocProvider<SeatCubit>(
+          create: (context) => SeatCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -53,7 +57,6 @@ class _MyAppState extends State<MyApp> {
           '/sign-in': (context) => SignInPage(),
           '/bonus': (context) => const BonusPage(),
           '/main': (context) => const MainPage(),
-          '/choose-seat': (context) => const ChooseSeatPage(),
           '/checkout': (context) => const CheckoutPage(),
           '/success-checkout': (context) => const SuccessCheckoutPage(),
         },
