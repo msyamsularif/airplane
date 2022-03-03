@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../cubits/auth/auth_cubit.dart';
+import '../../cubits/seat/seat_cubit.dart';
 import '../../cubits/transaction/transaction_cubit.dart';
 import '../../models/transaction_model.dart';
 import '../../shared/theme.dart';
@@ -344,9 +345,12 @@ class CheckoutPage extends StatelessWidget {
           return CustomBottom(
             title: 'Pay Now',
             margin: const EdgeInsets.only(top: 30),
-            onPressed: () => context
-                .read<TransactionCubit>()
-                .createTransaction(transaction: transaction),
+            onPressed: () {
+              context.read<SeatCubit>().removeListSeats();
+              context
+                  .read<TransactionCubit>()
+                  .createTransaction(transaction: transaction);
+            },
           );
         },
       );

@@ -17,12 +17,11 @@ class SeatCubit extends Cubit<List<String>> {
   }
 
   bool isSelected(String id) {
-    int index = state.indexOf(id);
-    if (index == -1) {
-      return false;
-    } else {
-      return true;
-    }
-    // return state.contains(id);
+    return state.contains(id);
+  }
+
+  void removeListSeats() {
+    state.clear();
+    emit(List.from(state));
   }
 }

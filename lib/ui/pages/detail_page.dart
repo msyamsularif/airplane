@@ -1,5 +1,8 @@
-import 'package:airplane/ui/pages/choose_seat_page.dart';
+import 'package:airplane/cubits/seat/seat_cubit.dart';
+
+import 'choose_seat_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/destination_model.dart';
 import '../widgets/custom_button.dart';
@@ -255,14 +258,17 @@ class DetailPage extends StatelessWidget {
                   CustomBottom(
                     width: 170,
                     title: 'Book Now',
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => ChooseSeatPage(
-                          destination: destination,
+                    onPressed: () {
+                      context.read<SeatCubit>().removeListSeats();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ChooseSeatPage(
+                            destination: destination,
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ],
               ),

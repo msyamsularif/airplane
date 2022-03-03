@@ -12,7 +12,7 @@ class TransactionInitial extends TransactionState {}
 class TransactionLoading extends TransactionState {}
 
 class TransactionSuccess extends TransactionState {
-  final TransactionModel transaction;
+  final List<TransactionModel> transaction;
 
   const TransactionSuccess({
     required this.transaction,
