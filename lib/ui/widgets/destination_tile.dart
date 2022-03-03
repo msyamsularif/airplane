@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/destination_model.dart';
 import '../../shared/theme.dart';
+import '../pages/detail_page.dart';
 
 class DestinaitonTile extends StatelessWidget {
   final DestinationModel destination;
@@ -14,7 +15,12 @@ class DestinaitonTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, '/detail-destination'),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailPage(destination: destination),
+        ),
+      ),
       child: Container(
         margin: const EdgeInsets.only(top: 16),
         padding: const EdgeInsets.all(10),
