@@ -1,3 +1,4 @@
+import 'package:airplane/cubits/destination/destination_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,7 +40,10 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider<AuthCubit>(
           create: (context) => AuthCubit(),
-        )
+        ),
+        BlocProvider<DestinationCubit>(
+          create: (context) => DestinationCubit()..fetchDestinations(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

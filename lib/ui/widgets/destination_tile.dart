@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../models/destination_model.dart';
 import '../../shared/theme.dart';
 
 class DestinaitonTile extends StatelessWidget {
-  final String name;
-  final String city;
-  final String imageUrl;
-  final double rating;
+  final DestinationModel destination;
 
   const DestinaitonTile({
     Key? key,
-    required this.name,
-    required this.city,
-    required this.imageUrl,
-    this.rating = 0.0,
+    required this.destination,
   }) : super(key: key);
 
   @override
@@ -36,7 +31,7 @@ class DestinaitonTile extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(imageUrl),
+                  image: NetworkImage(destination.imageUrl),
                 ),
                 borderRadius: BorderRadius.circular(defaultRadius),
               ),
@@ -46,7 +41,7 @@ class DestinaitonTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    destination.name,
                     style: blackTextStyle.copyWith(
                       fontSize: 18,
                       fontWeight: medium,
@@ -54,7 +49,7 @@ class DestinaitonTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    city,
+                    destination.city,
                     style: greyTextStyle.copyWith(
                       fontWeight: light,
                     ),
@@ -76,7 +71,7 @@ class DestinaitonTile extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  rating.toString(),
+                  destination.rating.toString(),
                   style: blackTextStyle.copyWith(
                     fontWeight: medium,
                   ),
