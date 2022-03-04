@@ -41,7 +41,7 @@ class TransactionCard extends StatelessWidget {
               ),
               Text(
                 DateFormat('dd MMMM yyyy • kk:mm').format(
-                  DateTime.fromMicrosecondsSinceEpoch(transaction.createdAt),
+                  DateTime.fromMicrosecondsSinceEpoch(transaction.createdAt!),
                 ),
                 style: greyTextStyle.copyWith(
                   fontWeight: medium,

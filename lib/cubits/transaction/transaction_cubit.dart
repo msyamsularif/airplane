@@ -35,7 +35,7 @@ class TransactionCubit extends Cubit<TransactionState> {
     required List<TransactionModel> transaction,
   }) async {
     final sortedByDateTime = transaction
-      ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      ..sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
 
     return sortedByDateTime;
   }

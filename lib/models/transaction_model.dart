@@ -14,7 +14,7 @@ class TransactionModel extends Equatable {
   final double vit;
   final int price;
   final int grandTotal;
-  final int createdAt;
+  final int? createdAt;
 
   const TransactionModel({
     this.id = '',
@@ -27,7 +27,7 @@ class TransactionModel extends Equatable {
     this.vit = 0.0,
     this.price = 0,
     this.grandTotal = 0,
-    this.createdAt = 0,
+    this.createdAt,
   });
 
   @override

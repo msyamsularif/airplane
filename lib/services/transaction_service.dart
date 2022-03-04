@@ -12,18 +12,7 @@ class TransactionService {
   Future<void> createTransaction(
       {required TransactionModel transaction}) async {
     try {
-      _transactionReference.add({
-        'user': transaction.user.toJson(),
-        'destination': transaction.destination.toJson(),
-        'amountOfTravelers': transaction.amountOfTravelers,
-        'selectedSeats': transaction.selectedSeats,
-        'insurance': transaction.insurance,
-        'refundable': transaction.refundable,
-        'vit': transaction.vit,
-        'price': transaction.price,
-        'grandTotal': transaction.grandTotal,
-        'createdAt': DateTime.now().microsecondsSinceEpoch,
-      });
+      _transactionReference.add(transaction.toJson());
     } catch (e) {
       rethrow;
     }
