@@ -347,6 +347,7 @@ class CheckoutPage extends StatelessWidget {
             margin: const EdgeInsets.only(top: 30),
             onPressed: () {
               context.read<SeatCubit>().removeListSeats();
+              context.read<AuthCubit>().updateBalance(transaction: transaction);
               context
                   .read<TransactionCubit>()
                   .createTransaction(transaction: transaction);

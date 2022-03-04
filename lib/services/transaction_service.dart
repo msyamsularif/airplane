@@ -12,7 +12,7 @@ class TransactionService {
   Future<void> createTransaction(
       {required TransactionModel transaction}) async {
     try {
-      _transactionReference.add(transaction.toJson());
+      await _transactionReference.add(transaction.toJson());
     } catch (e) {
       rethrow;
     }

@@ -1,9 +1,10 @@
-import 'package:airplane/services/user_service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../models/transaction_model.dart';
 import '../../models/user_model.dart';
 import '../../services/auth_service.dart';
+import '../../services/user_service.dart';
 
 part 'auth_state.dart';
 
@@ -58,6 +59,29 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthLoading());
       UserModel user = await UserService().getUserById(id: id);
       emit(AuthSuccess(user: user));
+    } catch (e) {
+      emit(AuthFailed(errorMessage: e.toString()));
+    }
+  }
+
+  void updateBalance({
+    required TransactionModel transaction,
+    bool topUpbalance = false,
+  }) async {
+    try {
+      emit(AuthLoading());
+      if (!topUpbalance) {}
+      final int currentBalance = transaction.user.balance;
+      final int grandTotalTransaction = transaction.grandTotal;
+
+      if (currentBalance < grandTotalTransaction) {
+        emit(const AuthFailed(errorMessage: 'Insufficient Balance'));
+      } else {
+        final int paid = currentBalance - grandTotalTransaction;
+        final newValueUser = transaction.user.copyWith(balance: paid);
+        await UserService().updateUser(user: newValueUser);
+        emit(AuthSuccess(user: newValueUser));
+      }
     } catch (e) {
       emit(AuthFailed(errorMessage: e.toString()));
     }

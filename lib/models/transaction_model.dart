@@ -80,4 +80,32 @@ class TransactionModel extends Equatable {
           map['createdAt']?.toInt() ?? DateTime.now().microsecondsSinceEpoch,
     );
   }
+
+  TransactionModel copyWith({
+    String? id,
+    UserModel? user,
+    DestinationModel? destination,
+    int? amountOfTravelers,
+    String? selectedSeats,
+    bool? insurance,
+    bool? refundable,
+    double? vit,
+    int? price,
+    int? grandTotal,
+    int? createdAt,
+  }) {
+    return TransactionModel(
+      id: id ?? this.id,
+      user: user ?? this.user,
+      destination: destination ?? this.destination,
+      amountOfTravelers: amountOfTravelers ?? this.amountOfTravelers,
+      selectedSeats: selectedSeats ?? this.selectedSeats,
+      insurance: insurance ?? this.insurance,
+      refundable: refundable ?? this.refundable,
+      vit: vit ?? this.vit,
+      price: price ?? this.price,
+      grandTotal: grandTotal ?? this.grandTotal,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
 }
