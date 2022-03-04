@@ -64,7 +64,7 @@ class TransactionModel extends Equatable {
   factory TransactionModel.fromJson(String id, Map<String, dynamic> map) {
     return TransactionModel(
       id: id,
-      user: UserModel.fromJson(map['user']),
+      user: UserModel.fromJson(map['user']['id'], map['user']),
       destination: DestinationModel.fromJson(
         map['destination']['id'],
         map['destination'],

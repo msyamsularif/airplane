@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 class UserModel extends Equatable {
@@ -29,13 +28,18 @@ class UserModel extends Equatable {
     };
   }
 
-  factory UserModel.fromJson(Map<String, dynamic> map) {
+  factory UserModel.fromJson(String id, Map<String, dynamic> map) {
     return UserModel(
-      id: map['id'] ?? '',
+      id: id,
       email: map['email'] ?? '',
       name: map['name'] ?? '',
       hobby: map['hobby'] ?? '',
       balance: map['balance']?.toInt() ?? 0,
     );
+  }
+
+  @override
+  String toString() {
+    return 'UserModel(id: $id, email: $email, name: $name, hobby: $hobby, balance: $balance)';
   }
 }

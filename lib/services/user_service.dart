@@ -22,13 +22,10 @@ class UserService {
   Future<UserModel> getUserById({required String id}) async {
     try {
       DocumentSnapshot snapshot = await _userReference.doc(id).get();
-      return UserModel(
-        id: id,
-        email: snapshot['email'],
-        name: snapshot['name'],
-        hobby: snapshot['hobby'],
-        balance: snapshot['balance'],
-      );
+      final userMap = snapshot.data() as Map<String, dynamic>;
+      final user = UserModel.fromJson(id, userMap);
+
+      return user;
     } catch (e) {
       rethrow;
     }
