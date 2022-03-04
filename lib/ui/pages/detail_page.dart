@@ -1,3 +1,4 @@
+import 'package:airplane/cubits/auth/auth_cubit.dart';
 import 'package:airplane/cubits/seat/seat_cubit.dart';
 
 import 'choose_seat_page.dart';
@@ -255,18 +256,25 @@ class DetailPage extends StatelessWidget {
                   ),
 
                   // NOTE: BOOK BUTTON
-                  CustomBottom(
-                    width: 170,
-                    title: 'Book Now',
-                    onPressed: () {
-                      context.read<SeatCubit>().removeListSeats();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => ChooseSeatPage(
-                            destination: destination,
-                          ),
-                        ),
+                  BlocBuilder<AuthCubit, AuthState>(
+                    builder: (context, state) {
+                      return CustomBottom(
+                        width: 170,
+                        title: 'Book Now',
+                        onPressed: state is AuthSuccess
+                            ? () {
+                                context.read<SeatCubit>().removeListSeats();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => ChooseSeatPage(
+                                      destination: destination,
+                                      user: state.user,
+                                    ),
+                                  ),
+                                );
+                              }
+                            : null,
                       );
                     },
                   ),

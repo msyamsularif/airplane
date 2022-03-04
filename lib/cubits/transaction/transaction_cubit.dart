@@ -23,9 +23,20 @@ class TransactionCubit extends Cubit<TransactionState> {
     try {
       emit(TransactionLoading());
       final transactions = await TransactionService().fetchTransactions();
-      emit(TransactionSuccess(transaction: transactions));
+      final sortedTransaction =
+          await sortedTransactionByDateTime(transaction: transactions);
+      emit(TransactionSuccess(transaction: sortedTransaction));
     } catch (e) {
       emit(TransactionFailed(errorMessage: e.toString()));
     }
+  }
+
+  Future<List<TransactionModel>> sortedTransactionByDateTime({
+    required List<TransactionModel> transaction,
+  }) async {
+    final sortedByDateTime = transaction
+      ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+    return sortedByDateTime;
   }
 }

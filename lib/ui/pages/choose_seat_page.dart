@@ -1,22 +1,24 @@
-import 'package:airplane/models/transaction_model.dart';
-import 'package:airplane/ui/pages/checkout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import 'package:airplane/models/destination_model.dart';
-
 import '../../cubits/seat/seat_cubit.dart';
+import '../../models/destination_model.dart';
+import '../../models/transaction_model.dart';
+import '../../models/user_model.dart';
 import '../../shared/theme.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/seat_item.dart';
+import 'checkout_page.dart';
 
 class ChooseSeatPage extends StatelessWidget {
   final DestinationModel destination;
+  final UserModel user;
 
   const ChooseSeatPage({
     Key? key,
     required this.destination,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -431,6 +433,7 @@ class ChooseSeatPage extends StatelessWidget {
                         builder: (_) {
                           return CheckoutPage(
                             transaction: TransactionModel(
+                              user: user,
                               destination: destination,
                               amountOfTravelers: state.length,
                               selectedSeats: state.join(', '),

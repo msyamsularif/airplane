@@ -6,7 +6,9 @@ import '../../shared/theme.dart';
 import '../widgets/transaction_card.dart';
 
 class TransactionPage extends StatefulWidget {
-  const TransactionPage({Key? key}) : super(key: key);
+  const TransactionPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<TransactionPage> createState() => _TransactionPageState();
@@ -35,8 +37,18 @@ class _TransactionPageState extends State<TransactionPage> {
               child: Text('No Transaction'),
             );
           } else {
+            //   final sortedByDateTime = state.transaction
+            //     ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+            //  final sortedByUser =  sortedByDateTime.where((element) => element.user == ).toList();
+
             return ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+              padding: EdgeInsets.only(
+                left: defaultMargin,
+                right: defaultMargin,
+                top: defaultMargin,
+                bottom: 124,
+              ),
               itemCount: state.transaction.length,
               itemBuilder: (context, index) => TransactionCard(
                 transaction: state.transaction[index],

@@ -7,7 +7,7 @@ import 'booking_details_item.dart';
 
 class TransactionCard extends StatelessWidget {
   final TransactionModel transaction;
-  
+
   const TransactionCard({
     Key? key,
     required this.transaction,
@@ -28,7 +28,29 @@ class TransactionCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //NOTE : DESTINATION TILE
+          // NOTE : TRANSACTION DATE
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Success',
+                  style: greenTextStyle.copyWith(
+                    fontWeight: medium,
+                  ),
+                ),
+              ),
+              Text(
+                DateFormat('dd MMMM yyyy • kk:mm').format(
+                  DateTime.fromMicrosecondsSinceEpoch(transaction.createdAt),
+                ),
+                style: greyTextStyle.copyWith(
+                  fontWeight: medium,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          // NOTE : DESTINATION TILE
           Row(
             children: [
               Container(

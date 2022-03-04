@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/transaction_model.dart';
 
@@ -6,10 +7,13 @@ class TransactionService {
   final CollectionReference _transactionReference =
       FirebaseFirestore.instance.collection('transactions');
 
+  User? user = FirebaseAuth.instance.currentUser;
+
   Future<void> createTransaction(
       {required TransactionModel transaction}) async {
     try {
       _transactionReference.add({
+        'user': transaction.user.toJson(),
         'destination': transaction.destination.toJson(),
         'amountOfTravelers': transaction.amountOfTravelers,
         'selectedSeats': transaction.selectedSeats,
@@ -18,6 +22,7 @@ class TransactionService {
         'vit': transaction.vit,
         'price': transaction.price,
         'grandTotal': transaction.grandTotal,
+        'createdAt': DateTime.now().microsecondsSinceEpoch,
       });
     } catch (e) {
       rethrow;
@@ -26,6 +31,8 @@ class TransactionService {
 
   Future<List<TransactionModel>> fetchTransactions() async {
     try {
+      if (user == null) throw 'User no authenticated';
+
       QuerySnapshot result = await _transactionReference.get();
 
       List<TransactionModel> transactions = result.docs
@@ -35,7 +42,11 @@ class TransactionService {
           )
           .toList();
 
-      return transactions;
+      final filterTransaction = transactions
+          .where((element) => element.user.id == user!.uid)
+          .toList();
+
+      return filterTransaction;
     } catch (e) {
       rethrow;
     }
