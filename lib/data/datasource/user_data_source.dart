@@ -9,13 +9,18 @@ abstract class UserDataSource {
 }
 
 class UserDataSourceImpl implements UserDataSource {
-  final CollectionReference _userReference =
-      FirebaseFirestore.instance.collection('users');
+  final CollectionReference userReference;
+
+  UserDataSourceImpl({
+    required this.userReference,
+  });
+  // final CollectionReference _userReference =
+  //     FirebaseFirestore.instance.collection('users');
 
   @override
   Future<UserModel> getUserById({required String id}) async {
     try {
-      DocumentSnapshot snapshot = await _userReference.doc(id).get();
+      DocumentSnapshot snapshot = await userReference.doc(id).get();
       final userMap = snapshot.data() as Map<String, dynamic>;
       final user = UserModel.fromJson(id, userMap);
 
@@ -28,7 +33,7 @@ class UserDataSourceImpl implements UserDataSource {
   @override
   Future<void> setUser({required UserModel user}) async {
     try {
-      _userReference.doc(user.id).set(user.toJson());
+      userReference.doc(user.id).set(user.toJson());
     } catch (e) {
       rethrow;
     }
@@ -37,7 +42,7 @@ class UserDataSourceImpl implements UserDataSource {
   @override
   Future<void> updateUser({required UserModel user}) async {
     try {
-      await _userReference.doc(user.id).update(user.toJson());
+      await userReference.doc(user.id).update(user.toJson());
     } catch (e) {
       rethrow;
     }

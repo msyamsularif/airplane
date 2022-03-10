@@ -7,13 +7,17 @@ abstract class DestinationDataSource {
 }
 
 class DestinationDataSourceImpl implements DestinationDataSource {
-  final CollectionReference _destinationRefeference =
-      FirebaseFirestore.instance.collection('destinations');
+  final CollectionReference destinationReference;
+  DestinationDataSourceImpl({
+    required this.destinationReference,
+  });
+  // final CollectionReference _destinationRefeference =
+  //     FirebaseFirestore.instance.collection('destinations');
 
   @override
   Future<List<DestinationModel>> fetchDestinations() async {
     try {
-      QuerySnapshot result = await _destinationRefeference.get();
+      QuerySnapshot result = await destinationReference.get();
 
       List<DestinationModel> destinations = result.docs
           .map(

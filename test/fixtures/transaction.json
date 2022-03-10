@@ -1,0 +1,26 @@
+{
+    "id": "1",
+    "user": {
+        "id": "1",
+        "email": "email@gmail.com",
+        "name": "name",
+        "hobby": "hobby",
+        "balance": 100
+    },
+    "destination": {
+        "id": "1",
+        "name": "name",
+        "city": "city",
+        "imageUrl": "imageUrl",
+        "rating": 1.0,
+        "price": 1
+    },
+    "amountOfTravelers": 1,
+    "selectedSeats": "A1",
+    "insurance": true,
+    "refundable": true,
+    "vit": 0.5,
+    "price": 100,
+    "grandTotal": 100,
+    "createdAt": 1646795474440000
+}

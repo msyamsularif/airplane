@@ -18,14 +18,22 @@ abstract class AuthDataSource {
 }
 
 class AuthDataSourceImpl implements AuthDataSource {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final UserDataSource userDataSource = UserDataSourceImpl();
+  final FirebaseAuth firebaseAuth;
+  final UserDataSource userDataSource;
+
+  AuthDataSourceImpl({
+    required this.firebaseAuth,
+    required this.userDataSource,
+  });
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
+  // final UserDataSource userDataSource = UserDataSourceImpl();
 
   @override
   Future<UserModel> signIn(
       {required String email, required String password}) async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      UserCredential userCredential =
+          await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -42,7 +50,7 @@ class AuthDataSourceImpl implements AuthDataSource {
   @override
   Future<void> signOut() async {
     try {
-      await _auth.signOut();
+      await firebaseAuth.signOut();
     } catch (e) {
       rethrow;
     }
@@ -57,7 +65,7 @@ class AuthDataSourceImpl implements AuthDataSource {
   }) async {
     try {
       UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
+          await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );

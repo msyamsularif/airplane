@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../shared/theme.dart';
 import '../cubits/auth/auth_cubit.dart';
@@ -18,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Timer(const Duration(seconds: 3), () {
-      User? user = FirebaseAuth.instance.currentUser;
+      User? user = GetIt.I.get<FirebaseAuth>().currentUser;
 
       if (user == null) {
         Navigator.pushNamedAndRemoveUntil(

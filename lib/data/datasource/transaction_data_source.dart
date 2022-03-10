@@ -10,15 +10,20 @@ abstract class TransactionDataSource {
 }
 
 class TransactionDataSourceImpl implements TransactionDataSource {
-  final CollectionReference _transactionReference =
-      FirebaseFirestore.instance.collection('transactions');
+  final CollectionReference transactionReference;
+
+  TransactionDataSourceImpl({
+    required this.transactionReference,
+  });
+  // final CollectionReference transactionReference! =
+  //     FirebaseFirestore.instance.collection('transactions');
 
   @override
   Future<void> createTransaction({
     required TransactionModel transaction,
   }) async {
     try {
-      await _transactionReference.add(transaction.toJson());
+      await transactionReference.add(transaction.toJson());
     } catch (e) {
       rethrow;
     }
@@ -29,7 +34,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
     required String userId,
   }) async {
     try {
-      QuerySnapshot result = await _transactionReference.get();
+      QuerySnapshot result = await transactionReference.get();
 
       List<TransactionModel> transactions = result.docs
           .map(
