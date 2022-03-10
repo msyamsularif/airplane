@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
-import 'core/collection/firebase_collection.dart';
+import 'core/helper/firebase_helper.dart';
 import 'data/datasource/auth_data_source.dart';
 import 'data/datasource/destination_data_source.dart';
 import 'data/datasource/transaction_data_source.dart';
@@ -49,16 +51,20 @@ class _MyAppState extends State<MyApp> {
         RepositoryProvider(
           create: (context) => UserRepositoryImpl(
             userDataSource: UserDataSourceImpl(
-              userReference: FirebaseHelper.userReference,
+              userReference: GetIt.I.get<FirebaseFirestore>().collection(
+                    FirebaseHelper.userCollection,
+                  ),
             ),
           ),
         ),
         RepositoryProvider(
           create: (context) => AuthRepositoryImpl(
             authDataSource: AuthDataSourceImpl(
-              firebaseAuth: FirebaseAuth.instance,
+              firebaseAuth: GetIt.I.get<FirebaseAuth>(),
               userDataSource: UserDataSourceImpl(
-                userReference: FirebaseHelper.userReference,
+                userReference: GetIt.I.get<FirebaseFirestore>().collection(
+                      FirebaseHelper.userCollection,
+                    ),
               ),
             ),
           ),
@@ -66,14 +72,18 @@ class _MyAppState extends State<MyApp> {
         RepositoryProvider(
           create: (context) => DestinationRepositoryImpl(
             destinationDataSource: DestinationDataSourceImpl(
-              destinationReference: FirebaseHelper.destinationReference,
+              destinationReference: GetIt.I.get<FirebaseFirestore>().collection(
+                    FirebaseHelper.destiantionCollection,
+                  ),
             ),
           ),
         ),
         RepositoryProvider(
           create: (context) => TransactionRepositoryImpl(
             transactionDataSource: TransactionDataSourceImpl(
-              transactionReference: FirebaseHelper.transactionReference,
+              transactionReference: GetIt.I.get<FirebaseFirestore>().collection(
+                    FirebaseHelper.transactionCollection,
+                  ),
             ),
           ),
         ),
