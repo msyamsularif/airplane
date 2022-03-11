@@ -25,8 +25,6 @@ class AuthDataSourceImpl implements AuthDataSource {
     required this.firebaseAuth,
     required this.userDataSource,
   });
-  // final FirebaseAuth _auth = FirebaseAuth.instance;
-  // final UserDataSource userDataSource = UserDataSourceImpl();
 
   @override
   Future<UserModel> signIn(

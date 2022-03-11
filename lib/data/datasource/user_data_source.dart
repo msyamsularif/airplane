@@ -14,8 +14,6 @@ class UserDataSourceImpl implements UserDataSource {
   UserDataSourceImpl({
     required this.userReference,
   });
-  // final CollectionReference _userReference =
-  //     FirebaseFirestore.instance.collection('users');
 
   @override
   Future<UserModel> getUserById({required String id}) async {

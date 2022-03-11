@@ -15,8 +15,6 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   TransactionDataSourceImpl({
     required this.transactionReference,
   });
-  // final CollectionReference transactionReference! =
-  //     FirebaseFirestore.instance.collection('transactions');
 
   @override
   Future<void> createTransaction({

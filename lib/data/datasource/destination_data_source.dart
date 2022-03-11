@@ -11,8 +11,6 @@ class DestinationDataSourceImpl implements DestinationDataSource {
   DestinationDataSourceImpl({
     required this.destinationReference,
   });
-  // final CollectionReference _destinationRefeference =
-  //     FirebaseFirestore.instance.collection('destinations');
 
   @override
   Future<List<DestinationModel>> fetchDestinations() async {
