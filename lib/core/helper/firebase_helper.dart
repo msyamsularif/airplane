@@ -8,13 +8,4 @@ class FirebaseHelper {
 
   static FirebaseAuth instanceAuth = FirebaseAuth.instance;
   static FirebaseFirestore instanceFirestore = FirebaseFirestore.instance;
-
-  // static CollectionReference destinationReference =
-  //     FirebaseFirestore.instance.collection('destinations');
-
-  // static CollectionReference transactionReference =
-  //     FirebaseFirestore.instance.collection('transactions');
-
-  // static CollectionReference userReference =
-  //     FirebaseFirestore.instance.collection('users');
 }
