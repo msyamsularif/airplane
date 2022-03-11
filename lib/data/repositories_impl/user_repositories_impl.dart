@@ -1,7 +1,9 @@
+import 'package:airplane/data/models/user_model.dart';
+
 import '../../core/values/values.dart';
+import '../../domain/entities/user_entities.dart';
 import '../../domain/repositories/user_repositories.dart';
 import '../datasource/user_data_source.dart';
-import '../models/user_model.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final UserDataSource userDataSource;
@@ -11,7 +13,7 @@ class UserRepositoryImpl implements UserRepository {
   });
 
   @override
-  Future<ApiReturnValue<UserModel>> getUserById({required String id}) async {
+  Future<ApiReturnValue<UserEntities>> getUserById({required String id}) async {
     try {
       final valueGetUser = await userDataSource.getUserById(id: id);
       return ApiReturnValue(value: valueGetUser);
@@ -21,18 +23,34 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<void> setUser({required UserModel user}) async {
+  Future<void> setUser({required UserEntities user}) async {
     try {
-      await userDataSource.setUser(user: user);
+      final resultUser = UserModel(
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        hobby: user.hobby,
+        balance: user.balance,
+      );
+
+      await userDataSource.setUser(user: resultUser);
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  Future<void> updateUser({required UserModel user}) async {
+  Future<void> updateUser({required UserEntities user}) async {
     try {
-      await userDataSource.updateUser(user: user);
+      final resultUser = UserModel(
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        hobby: user.hobby,
+        balance: user.balance,
+      );
+
+      await userDataSource.updateUser(user: resultUser);
     } catch (e) {
       rethrow;
     }

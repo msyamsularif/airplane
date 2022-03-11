@@ -1,4 +1,3 @@
-
 import '../../domain/entities/destination_entities.dart';
 
 class DestinationModel extends DestinationEntities {
@@ -40,6 +39,25 @@ class DestinationModel extends DestinationEntities {
       imageUrl: map['imageUrl'] ?? '',
       rating: map['rating']?.toDouble() ?? 0.0,
       price: map['price']?.toInt() ?? 0,
+    );
+  }
+
+  @override
+  DestinationModel copyWith({
+    String? id,
+    String? name,
+    String? city,
+    String? imageUrl,
+    double? rating,
+    int? price,
+  }) {
+    return DestinationModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      city: city ?? this.city,
+      imageUrl: imageUrl ?? this.imageUrl,
+      rating: rating ?? this.rating,
+      price: price ?? this.price,
     );
   }
 }

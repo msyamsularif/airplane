@@ -1,13 +1,17 @@
+import 'package:airplane/domain/entities/destination_entities.dart';
+import 'package:airplane/domain/entities/user_entities.dart';
 
 import '../../domain/entities/transaction_entities.dart';
 import 'destination_model.dart';
 import 'user_model.dart';
 
 class TransactionModel extends TransactionEntities {
+  final UserModel user;
+  final DestinationModel destination;
   const TransactionModel({
     String id = '',
-    required UserModel user,
-    required DestinationModel destination,
+    required this.user,
+    required this.destination,
     int amountOfTravelers = 0,
     String selectedSeats = '',
     bool insurance = false,
@@ -81,10 +85,11 @@ class TransactionModel extends TransactionEntities {
     );
   }
 
+  @override
   TransactionModel copyWith({
     String? id,
-    UserModel? user,
-    DestinationModel? destination,
+    UserEntities? user,
+    DestinationEntities? destination,
     int? amountOfTravelers,
     String? selectedSeats,
     bool? insurance,
@@ -94,10 +99,27 @@ class TransactionModel extends TransactionEntities {
     int? grandTotal,
     int? createdAt,
   }) {
+    final UserModel? userModel = UserModel(
+      id: user!.id,
+      email: user.email,
+      name: user.name,
+      hobby: user.hobby,
+      balance: user.balance,
+    );
+
+    final DestinationModel? destinationModel = DestinationModel(
+      id: destination!.id,
+      name: destination.name,
+      city: destination.city,
+      imageUrl: destination.imageUrl,
+      rating: destination.rating,
+      price: destination.price,
+    );
+
     return TransactionModel(
       id: id ?? this.id,
-      user: user ?? this.user,
-      destination: destination ?? this.destination,
+      user: userModel ?? this.user,
+      destination: destinationModel ?? this.destination,
       amountOfTravelers: amountOfTravelers ?? this.amountOfTravelers,
       selectedSeats: selectedSeats ?? this.selectedSeats,
       insurance: insurance ?? this.insurance,

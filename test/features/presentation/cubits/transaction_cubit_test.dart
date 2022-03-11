@@ -2,6 +2,7 @@ import 'package:airplane/core/values/values.dart';
 import 'package:airplane/data/models/destination_model.dart';
 import 'package:airplane/data/models/transaction_model.dart';
 import 'package:airplane/data/models/user_model.dart';
+import 'package:airplane/domain/entities/transaction_entities.dart';
 import 'package:airplane/presentation/cubits/transaction/transaction_cubit.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -133,7 +134,7 @@ void main() {
     'should return List<Transaction> with sorted transaction by createdAt',
     () async {
       // act
-      final List<TransactionModel> result = await transactionCubit
+      final List<TransactionEntities> result = await transactionCubit
           .sortedTransactionByDateTime(transaction: tListTransactionModel);
 
       // assert

@@ -1,6 +1,6 @@
 import '../../core/values/values.dart';
-import '../../data/models/destination_model.dart';
+import '../entities/destination_entities.dart';
 
 abstract class DestinationRepository {
-  Future<ApiReturnValue<List<DestinationModel>>> fetchDestinations();
+  Future<ApiReturnValue<List<DestinationEntities>>> fetchDestinations();
 }

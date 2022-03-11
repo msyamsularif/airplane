@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../data/models/destination_model.dart';
+import '../../domain/entities/destination_entities.dart';
 import '../../shared/theme.dart';
 import '../cubits/auth/auth_cubit.dart';
 import '../cubits/seat/seat_cubit.dart';
@@ -12,7 +12,7 @@ import '../widgets/photo_item.dart';
 import 'choose_seat_page.dart';
 
 class DetailPage extends StatelessWidget {
-  final DestinationModel destination;
+  final DestinationEntities destination;
 
   const DetailPage({
     Key? key,

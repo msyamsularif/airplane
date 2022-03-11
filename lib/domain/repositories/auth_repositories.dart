@@ -1,12 +1,12 @@
 import '../../core/values/values.dart';
-import '../../data/models/user_model.dart';
+import '../entities/user_entities.dart';
 
 abstract class AuthRepository {
-  Future<ApiReturnValue<UserModel>> signIn({
+  Future<ApiReturnValue<UserEntities>> signIn({
     required String email,
     required String password,
   });
-  Future<ApiReturnValue<UserModel>> signUp({
+  Future<ApiReturnValue<UserEntities>> signUp({
     required String email,
     required String password,
     required String name,

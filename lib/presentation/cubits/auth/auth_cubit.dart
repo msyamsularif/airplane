@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../data/models/transaction_model.dart';
-import '../../../data/models/user_model.dart';
+import '../../../domain/entities/transaction_entities.dart';
+import '../../../domain/entities/user_entities.dart';
 import '../../../domain/repositories/auth_repositories.dart';
 import '../../../domain/repositories/user_repositories.dart';
 
@@ -76,7 +76,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  void updateBalance({required TransactionModel transaction}) async {
+  void updateBalance({required TransactionEntities transaction}) async {
     try {
       emit(AuthLoading());
 

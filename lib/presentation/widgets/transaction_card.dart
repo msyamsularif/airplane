@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../data/models/transaction_model.dart';
+import '../../domain/entities/transaction_entities.dart';
 import '../../shared/theme.dart';
 import 'booking_details_item.dart';
 
 class TransactionCard extends StatelessWidget {
-  final TransactionModel transaction;
+  final TransactionEntities transaction;
 
   const TransactionCard({
     Key? key,

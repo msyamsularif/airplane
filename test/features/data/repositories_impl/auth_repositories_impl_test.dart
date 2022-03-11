@@ -1,6 +1,7 @@
 import 'package:airplane/core/values/values.dart';
 import 'package:airplane/data/models/user_model.dart';
 import 'package:airplane/data/repositories_impl/auth_repositories_impl.dart';
+import 'package:airplane/domain/entities/user_entities.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -38,8 +39,8 @@ void main() {
         // assert
         verify(
             mocDataSource.signIn(email: tUserModel.email, password: '123456'));
-        expect(
-            result, equals(const ApiReturnValue<UserModel>(value: tUserModel)));
+        expect(result,
+            equals(const ApiReturnValue<UserEntities>(value: tUserModel)));
       },
     );
 
@@ -63,7 +64,8 @@ void main() {
         expect(
           result,
           equals(
-            ApiReturnValue<UserModel>(message: Exception('error').toString()),
+            ApiReturnValue<UserEntities>(
+                message: Exception('error').toString()),
           ),
         );
       },
@@ -124,7 +126,7 @@ void main() {
         ));
         expect(
           result,
-          equals(const ApiReturnValue<UserModel>(value: tUserModel)),
+          equals(const ApiReturnValue<UserEntities>(value: tUserModel)),
         );
       },
     );
@@ -158,7 +160,7 @@ void main() {
         expect(
           result,
           equals(
-            ApiReturnValue<UserModel>(message: Exception('error').toString()),
+            ApiReturnValue<UserEntities>(message: Exception('error').toString()),
           ),
         );
       },

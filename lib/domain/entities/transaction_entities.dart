@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-import '../../data/models/destination_model.dart';
-import '../../data/models/user_model.dart';
+import 'destination_entities.dart';
+import 'user_entities.dart';
 
 class TransactionEntities extends Equatable {
   final String id;
-  final UserModel user;
-  final DestinationModel destination;
+  final UserEntities user;
+  final DestinationEntities destination;
   final int amountOfTravelers;
   final String selectedSeats;
   final bool insurance;
@@ -29,6 +29,7 @@ class TransactionEntities extends Equatable {
     this.grandTotal = 0,
     this.createdAt,
   });
+
   @override
   List<Object?> get props => [
         id,
@@ -43,4 +44,32 @@ class TransactionEntities extends Equatable {
         grandTotal,
         createdAt,
       ];
+
+  TransactionEntities copyWith({
+    String? id,
+    UserEntities? user,
+    DestinationEntities? destination,
+    int? amountOfTravelers,
+    String? selectedSeats,
+    bool? insurance,
+    bool? refundable,
+    double? vit,
+    int? price,
+    int? grandTotal,
+    int? createdAt,
+  }) {
+    return TransactionEntities(
+      id: id ?? this.id,
+      user: user ?? this.user,
+      destination: destination ?? this.destination,
+      amountOfTravelers: amountOfTravelers ?? this.amountOfTravelers,
+      selectedSeats: selectedSeats ?? this.selectedSeats,
+      insurance: insurance ?? this.insurance,
+      refundable: refundable ?? this.refundable,
+      vit: vit ?? this.vit,
+      price: price ?? this.price,
+      grandTotal: grandTotal ?? this.grandTotal,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
 }

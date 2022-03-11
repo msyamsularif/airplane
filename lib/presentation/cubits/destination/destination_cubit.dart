@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../data/models/destination_model.dart';
+import '../../../domain/entities/destination_entities.dart';
 import '../../../domain/repositories/destination_repositories.dart';
 
 part 'destination_state.dart';

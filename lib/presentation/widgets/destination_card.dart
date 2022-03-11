@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../data/models/destination_model.dart';
+import '../../domain/entities/destination_entities.dart';
 import '../../shared/theme.dart';
 import '../pages/detail_page.dart';
 
 class DestinationCard extends StatelessWidget {
-  final DestinationModel destination;
+  final DestinationEntities destination;
 
   const DestinationCard({
     Key? key,

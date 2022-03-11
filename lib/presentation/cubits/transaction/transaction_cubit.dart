@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../data/models/transaction_model.dart';
+import '../../../domain/entities/transaction_entities.dart';
 import '../../../domain/repositories/transaction_repositories.dart';
 
 part 'transaction_state.dart';
@@ -13,7 +13,7 @@ class TransactionCubit extends Cubit<TransactionState> {
       : _transactionRepository = transactionRepository,
         super(TransactionInitial());
 
-  void createTransaction({required TransactionModel transaction}) async {
+  void createTransaction({required TransactionEntities transaction}) async {
     try {
       emit(TransactionLoading());
       await _transactionRepository.createTransaction(transaction: transaction);
@@ -39,8 +39,8 @@ class TransactionCubit extends Cubit<TransactionState> {
     }
   }
 
-  Future<List<TransactionModel>> sortedTransactionByDateTime({
-    required List<TransactionModel> transaction,
+  Future<List<TransactionEntities>> sortedTransactionByDateTime({
+    required List<TransactionEntities> transaction,
   }) async {
     final sortedByDateTime = transaction
       ..sort((a, b) => b.createdAt!.compareTo(a.createdAt!));

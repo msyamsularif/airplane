@@ -23,4 +23,20 @@ class UserEntities extends Equatable {
         hobby,
         balance,
       ];
+
+  UserEntities copyWith({
+    String? id,
+    String? email,
+    String? name,
+    String? hobby,
+    int? balance,
+  }) {
+    return UserEntities(
+      id: id ?? this.id,
+      email: email ?? this.email,
+      name: name ?? this.name,
+      hobby: hobby ?? this.hobby,
+      balance: balance ?? this.balance,
+    );
+  }
 }

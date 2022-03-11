@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/models/destination_model.dart';
+import '../../domain/entities/destination_entities.dart';
 import '../../shared/theme.dart';
 import '../cubits/auth/auth_cubit.dart';
 import '../cubits/destination/destination_cubit.dart';
@@ -68,7 +68,8 @@ class HomePage extends StatelessWidget {
       );
     }
 
-    Widget pupularDestination({required List<DestinationModel> destination}) {
+    Widget pupularDestination(
+        {required List<DestinationEntities> destination}) {
       return Container(
         margin: const EdgeInsets.only(top: 30),
         child: SingleChildScrollView(
@@ -84,7 +85,7 @@ class HomePage extends StatelessWidget {
       );
     }
 
-    Widget newDestinations({required List<DestinationModel> destination}) {
+    Widget newDestinations({required List<DestinationEntities> destination}) {
       return Container(
         margin: EdgeInsets.only(
           top: 30,

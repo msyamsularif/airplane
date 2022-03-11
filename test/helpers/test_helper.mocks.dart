@@ -13,12 +13,15 @@ import 'package:airplane/data/datasource/user_data_source.dart' as _i7;
 import 'package:airplane/data/models/destination_model.dart' as _i11;
 import 'package:airplane/data/models/transaction_model.dart' as _i13;
 import 'package:airplane/data/models/user_model.dart' as _i2;
+import 'package:airplane/domain/entities/destination_entities.dart' as _i21;
+import 'package:airplane/domain/entities/transaction_entities.dart' as _i23;
+import 'package:airplane/domain/entities/user_entities.dart' as _i18;
 import 'package:airplane/domain/repositories/auth_repositories.dart' as _i17;
 import 'package:airplane/domain/repositories/destination_repositories.dart'
-    as _i19;
-import 'package:airplane/domain/repositories/transaction_repositories.dart'
     as _i20;
-import 'package:airplane/domain/repositories/user_repositories.dart' as _i18;
+import 'package:airplane/domain/repositories/transaction_repositories.dart'
+    as _i22;
+import 'package:airplane/domain/repositories/user_repositories.dart' as _i19;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i4;
 import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart'
     as _i14;
@@ -930,15 +933,15 @@ class MockAuthRepository extends _i1.Mock implements _i17.AuthRepository {
   }
 
   @override
-  _i8.Future<_i6.ApiReturnValue<_i2.UserModel>> signIn(
+  _i8.Future<_i6.ApiReturnValue<_i18.UserEntities>> signIn(
           {String? email, String? password}) =>
       (super.noSuchMethod(
           Invocation.method(#signIn, [], {#email: email, #password: password}),
-          returnValue: Future<_i6.ApiReturnValue<_i2.UserModel>>.value(
-              _FakeApiReturnValue_18<_i2.UserModel>())) as _i8
-          .Future<_i6.ApiReturnValue<_i2.UserModel>>);
+          returnValue: Future<_i6.ApiReturnValue<_i18.UserEntities>>.value(
+              _FakeApiReturnValue_18<_i18.UserEntities>())) as _i8
+          .Future<_i6.ApiReturnValue<_i18.UserEntities>>);
   @override
-  _i8.Future<_i6.ApiReturnValue<_i2.UserModel>> signUp(
+  _i8.Future<_i6.ApiReturnValue<_i18.UserEntities>> signUp(
           {String? email,
           String? password,
           String? name,
@@ -950,9 +953,9 @@ class MockAuthRepository extends _i1.Mock implements _i17.AuthRepository {
                 #name: name,
                 #hobby: hobby
               }),
-              returnValue: Future<_i6.ApiReturnValue<_i2.UserModel>>.value(
-                  _FakeApiReturnValue_18<_i2.UserModel>()))
-          as _i8.Future<_i6.ApiReturnValue<_i2.UserModel>>);
+              returnValue: Future<_i6.ApiReturnValue<_i18.UserEntities>>.value(
+                  _FakeApiReturnValue_18<_i18.UserEntities>()))
+          as _i8.Future<_i6.ApiReturnValue<_i18.UserEntities>>);
   @override
   _i8.Future<void> signOut() =>
       (super.noSuchMethod(Invocation.method(#signOut, []),
@@ -963,73 +966,72 @@ class MockAuthRepository extends _i1.Mock implements _i17.AuthRepository {
 /// A class which mocks [UserRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserRepository extends _i1.Mock implements _i18.UserRepository {
+class MockUserRepository extends _i1.Mock implements _i19.UserRepository {
   MockUserRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<void> setUser({_i2.UserModel? user}) =>
+  _i8.Future<void> setUser({_i18.UserEntities? user}) =>
       (super.noSuchMethod(Invocation.method(#setUser, [], {#user: user}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i8.Future<void>);
   @override
-  _i8.Future<void> updateUser({_i2.UserModel? user}) =>
+  _i8.Future<void> updateUser({_i18.UserEntities? user}) =>
       (super.noSuchMethod(Invocation.method(#updateUser, [], {#user: user}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i8.Future<void>);
   @override
-  _i8.Future<_i6.ApiReturnValue<_i2.UserModel>> getUserById({String? id}) =>
+  _i8.Future<_i6.ApiReturnValue<_i18.UserEntities>> getUserById({String? id}) =>
       (super.noSuchMethod(Invocation.method(#getUserById, [], {#id: id}),
-              returnValue: Future<_i6.ApiReturnValue<_i2.UserModel>>.value(
-                  _FakeApiReturnValue_18<_i2.UserModel>()))
-          as _i8.Future<_i6.ApiReturnValue<_i2.UserModel>>);
+              returnValue: Future<_i6.ApiReturnValue<_i18.UserEntities>>.value(
+                  _FakeApiReturnValue_18<_i18.UserEntities>()))
+          as _i8.Future<_i6.ApiReturnValue<_i18.UserEntities>>);
 }
 
 /// A class which mocks [DestinationRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDestinationRepository extends _i1.Mock
-    implements _i19.DestinationRepository {
+    implements _i20.DestinationRepository {
   MockDestinationRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<_i6.ApiReturnValue<List<_i11.DestinationModel>>>
+  _i8.Future<_i6.ApiReturnValue<List<_i21.DestinationEntities>>>
       fetchDestinations() => (super.noSuchMethod(
               Invocation.method(#fetchDestinations, []),
-              returnValue:
-                  Future<_i6.ApiReturnValue<List<_i11.DestinationModel>>>.value(
-                      _FakeApiReturnValue_18<List<_i11.DestinationModel>>()))
-          as _i8.Future<_i6.ApiReturnValue<List<_i11.DestinationModel>>>);
+              returnValue: Future<
+                      _i6.ApiReturnValue<List<_i21.DestinationEntities>>>.value(
+                  _FakeApiReturnValue_18<List<_i21.DestinationEntities>>()))
+          as _i8.Future<_i6.ApiReturnValue<List<_i21.DestinationEntities>>>);
 }
 
 /// A class which mocks [TransactionRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTransactionRepository extends _i1.Mock
-    implements _i20.TransactionRepository {
+    implements _i22.TransactionRepository {
   MockTransactionRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<void> createTransaction({_i13.TransactionModel? transaction}) =>
+  _i8.Future<void> createTransaction({_i23.TransactionEntities? transaction}) =>
       (super.noSuchMethod(
           Invocation.method(
               #createTransaction, [], {#transaction: transaction}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i8.Future<void>);
   @override
-  _i8.Future<_i6.ApiReturnValue<List<_i13.TransactionModel>>> fetchTransactions(
-          {String? userId}) =>
-      (super.noSuchMethod(
+  _i8.Future<_i6.ApiReturnValue<List<_i23.TransactionEntities>>>
+      fetchTransactions({String? userId}) => (super.noSuchMethod(
               Invocation.method(#fetchTransactions, [], {#userId: userId}),
-              returnValue:
-                  Future<_i6.ApiReturnValue<List<_i13.TransactionModel>>>.value(
-                      _FakeApiReturnValue_18<List<_i13.TransactionModel>>()))
-          as _i8.Future<_i6.ApiReturnValue<List<_i13.TransactionModel>>>);
+              returnValue: Future<
+                      _i6.ApiReturnValue<List<_i23.TransactionEntities>>>.value(
+                  _FakeApiReturnValue_18<List<_i23.TransactionEntities>>()))
+          as _i8.Future<_i6.ApiReturnValue<List<_i23.TransactionEntities>>>);
 }
 
 /// A class which mocks [QueryDocumentSnapshot].

@@ -1,11 +1,11 @@
 import '../../core/values/values.dart';
-import '../../data/models/transaction_model.dart';
+import '../entities/transaction_entities.dart';
 
 abstract class TransactionRepository {
   Future<void> createTransaction({
-    required TransactionModel transaction,
+    required TransactionEntities transaction,
   });
-  Future<ApiReturnValue<List<TransactionModel>>> fetchTransactions({
+  Future<ApiReturnValue<List<TransactionEntities>>> fetchTransactions({
     required String userId,
   });
 }

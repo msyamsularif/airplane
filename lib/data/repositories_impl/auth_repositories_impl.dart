@@ -1,7 +1,7 @@
 import '../../core/values/values.dart';
+import '../../domain/entities/user_entities.dart';
 import '../../domain/repositories/auth_repositories.dart';
 import '../datasource/auth_data_source.dart';
-import '../models/user_model.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthDataSource authDataSource;
@@ -11,7 +11,7 @@ class AuthRepositoryImpl implements AuthRepository {
   });
 
   @override
-  Future<ApiReturnValue<UserModel>> signIn({
+  Future<ApiReturnValue<UserEntities>> signIn({
     required String email,
     required String password,
   }) async {
@@ -34,7 +34,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<ApiReturnValue<UserModel>> signUp({
+  Future<ApiReturnValue<UserEntities>> signUp({
     required String email,
     required String password,
     required String name,

@@ -26,4 +26,22 @@ class DestinationEntities extends Equatable {
         rating,
         price,
       ];
+
+  DestinationEntities copyWith({
+    String? id,
+    String? name,
+    String? city,
+    String? imageUrl,
+    double? rating,
+    int? price,
+  }) {
+    return DestinationEntities(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      city: city ?? this.city,
+      imageUrl: imageUrl ?? this.imageUrl,
+      rating: rating ?? this.rating,
+      price: price ?? this.price,
+    );
+  }
 }

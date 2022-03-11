@@ -18,6 +18,7 @@ class UserModel extends UserEntities {
   @override
   List<Object?> get props => [id, email, name, hobby, balance];
 
+  @override
   UserModel copyWith({
     String? id,
     String? email,

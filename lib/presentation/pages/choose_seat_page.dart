@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../data/models/destination_model.dart';
-import '../../data/models/transaction_model.dart';
-import '../../data/models/user_model.dart';
+import '../../domain/entities/destination_entities.dart';
+import '../../domain/entities/transaction_entities.dart';
+import '../../domain/entities/user_entities.dart';
 import '../../shared/theme.dart';
 import '../cubits/seat/seat_cubit.dart';
 import '../widgets/custom_button.dart';
@@ -12,8 +12,8 @@ import '../widgets/seat_item.dart';
 import 'checkout_page.dart';
 
 class ChooseSeatPage extends StatelessWidget {
-  final DestinationModel destination;
-  final UserModel user;
+  final DestinationEntities destination;
+  final UserEntities user;
 
   const ChooseSeatPage({
     Key? key,
@@ -432,7 +432,7 @@ class ChooseSeatPage extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (_) {
                           return CheckoutPage(
-                            transaction: TransactionModel(
+                            transaction: TransactionEntities(
                               user: user,
                               destination: destination,
                               amountOfTravelers: state.length,

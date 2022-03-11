@@ -12,7 +12,7 @@ class DestinationInitial extends DestinationState {}
 class DestinationLoading extends DestinationState {}
 
 class DestinationSuccess extends DestinationState {
-  final List<DestinationModel> destinations;
+  final List<DestinationEntities> destinations;
 
   const DestinationSuccess({
     required this.destinations,
