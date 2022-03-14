@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+import '../../data/models/transaction_model.dart';
 import 'destination_entities.dart';
 import 'user_entities.dart';
 
@@ -72,4 +73,18 @@ class TransactionEntities extends Equatable {
       createdAt: createdAt ?? this.createdAt,
     );
   }
+
+  TransactionModel toModel() => TransactionModel(
+        id: id,
+        user: user.toModel(),
+        destination: destination.toModel(),
+        amountOfTravelers: amountOfTravelers,
+        selectedSeats: selectedSeats,
+        insurance: insurance,
+        refundable: refundable,
+        vit: vit,
+        price: price,
+        grandTotal: grandTotal,
+        createdAt: createdAt,
+      );
 }

@@ -40,7 +40,7 @@ void main() {
         verify(
             mocDataSource.signIn(email: tUserModel.email, password: '123456'));
         expect(result,
-            equals(const ApiReturnValue<UserEntities>(value: tUserModel)));
+            equals(ApiReturnValue<UserEntities>(value: tUserModel.toEntity())));
       },
     );
 
@@ -126,7 +126,7 @@ void main() {
         ));
         expect(
           result,
-          equals(const ApiReturnValue<UserEntities>(value: tUserModel)),
+          equals(ApiReturnValue<UserEntities>(value: tUserModel.toEntity())),
         );
       },
     );
@@ -160,7 +160,8 @@ void main() {
         expect(
           result,
           equals(
-            ApiReturnValue<UserEntities>(message: Exception('error').toString()),
+            ApiReturnValue<UserEntities>(
+                message: Exception('error').toString()),
           ),
         );
       },

@@ -66,7 +66,7 @@ void main() {
   );
 
   final List<TransactionModel> tTransactionUserModelsList = [
-    tTransactionModel.copyWith(id: '1', user: tUserModel),
+    tTransactionModel.copyWith(id: '1', user: tUserModel).toModel(),
   ];
 
   group('create transaction', () {

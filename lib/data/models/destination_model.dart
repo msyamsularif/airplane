@@ -20,6 +20,15 @@ class DestinationModel extends DestinationEntities {
   @override
   List<Object?> get props => [id, name, city, imageUrl, rating, price];
 
+  DestinationEntities toEntity() => DestinationEntities(
+        id: id,
+        name: name,
+        city: city,
+        imageUrl: imageUrl,
+        rating: rating,
+        price: price,
+      );
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -43,21 +52,7 @@ class DestinationModel extends DestinationEntities {
   }
 
   @override
-  DestinationModel copyWith({
-    String? id,
-    String? name,
-    String? city,
-    String? imageUrl,
-    double? rating,
-    int? price,
-  }) {
-    return DestinationModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      city: city ?? this.city,
-      imageUrl: imageUrl ?? this.imageUrl,
-      rating: rating ?? this.rating,
-      price: price ?? this.price,
-    );
+  String toString() {
+    return 'DestinationEntities(id: $id, name: $name, city: $city, imageUrl: $imageUrl, rating: $rating, price: $price)';
   }
 }

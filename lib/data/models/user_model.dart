@@ -18,22 +18,13 @@ class UserModel extends UserEntities {
   @override
   List<Object?> get props => [id, email, name, hobby, balance];
 
-  @override
-  UserModel copyWith({
-    String? id,
-    String? email,
-    String? name,
-    String? hobby,
-    int? balance,
-  }) {
-    return UserModel(
-      id: id ?? this.id,
-      email: email ?? this.email,
-      name: name ?? this.name,
-      hobby: hobby ?? this.hobby,
-      balance: balance ?? this.balance,
-    );
-  }
+  UserEntities toEntity() => UserEntities(
+        id: id,
+        email: email,
+        name: name,
+        hobby: hobby,
+        balance: balance,
+      );
 
   Map<String, dynamic> toJson() {
     return {

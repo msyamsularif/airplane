@@ -122,7 +122,7 @@ void main() {
 
         // assert
         verify(mockUserDataSource.setUser(user: anyNamed('user')));
-        expect(result, tUserModel.copyWith(balance: 280000000));
+        expect(result, tUserModel.copyWith(balance: 280000000).toModel());
       },
     );
     test(

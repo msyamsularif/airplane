@@ -49,8 +49,8 @@ void main() {
 
   final List<TransactionModel> tListTransactionModel = [
     tTransactionModel,
-    tTransactionModel.copyWith(createdAt: 1646886760853000),
-    tTransactionModel.copyWith(createdAt: 1646886790187000),
+    tTransactionModel.copyWith(createdAt: 1646886760853000).toModel(),
+    tTransactionModel.copyWith(createdAt: 1646886790187000).toModel(),
   ];
 
   test('initial state should be empty', () {
@@ -139,8 +139,8 @@ void main() {
 
       // assert
       expect(result, [
-        tTransactionModel.copyWith(createdAt: 1646886790187000),
-        tTransactionModel.copyWith(createdAt: 1646886760853000),
+        tTransactionModel.copyWith(createdAt: 1646886790187000).toModel(),
+        tTransactionModel.copyWith(createdAt: 1646886760853000).toModel(),
         tTransactionModel,
       ]);
     },

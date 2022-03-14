@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../data/models/user_model.dart';
+
 class UserEntities extends Equatable {
   final String id;
   final String email;
@@ -39,4 +41,12 @@ class UserEntities extends Equatable {
       balance: balance ?? this.balance,
     );
   }
+
+  UserModel toModel() => UserModel(
+        id: id,
+        email: email,
+        name: name,
+        hobby: hobby,
+        balance: balance,
+      );
 }

@@ -3,6 +3,7 @@ import 'package:airplane/data/models/destination_model.dart';
 import 'package:airplane/data/models/transaction_model.dart';
 import 'package:airplane/data/models/user_model.dart';
 import 'package:airplane/data/repositories_impl/transaction_repositories_impl.dart';
+import 'package:airplane/domain/entities/transaction_entities.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -54,9 +55,9 @@ void main() {
   );
 
   final List<TransactionModel> tTransactionUserModelsList = [
-    tTransactionModel.copyWith(id: '1', user: tUserModel),
-    tTransactionModel.copyWith(id: '2', user: tUserModel),
-    tTransactionModel.copyWith(id: '3', user: tUserModel),
+    tTransactionModel.copyWith(id: '1', user: tUserModel).toModel(),
+    tTransactionModel.copyWith(id: '2', user: tUserModel).toModel(),
+    tTransactionModel.copyWith(id: '3', user: tUserModel).toModel(),
   ];
 
   group('create transaction', () {
@@ -105,7 +106,9 @@ void main() {
         verify(mocDataSource.fetchTransactions(userId: tUserId));
         expect(
           result,
-          equals(ApiReturnValue(value: tTransactionUserModelsList)),
+          equals(ApiReturnValue<List<TransactionEntities>>(
+            value: tTransactionUserModelsList,
+          )),
         );
       },
     );
@@ -125,7 +128,7 @@ void main() {
         expect(
           result,
           equals(
-            ApiReturnValue<List<TransactionModel>>(
+            ApiReturnValue<List<TransactionEntities>>(
               message: Exception('error').toString(),
             ),
           ),

@@ -18,7 +18,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final valueSignIn =
           await authDataSource.signIn(email: email, password: password);
-      return ApiReturnValue(value: valueSignIn);
+      return ApiReturnValue(value: valueSignIn.toEntity());
     } catch (e) {
       return ApiReturnValue(message: e.toString());
     }
@@ -47,7 +47,7 @@ class AuthRepositoryImpl implements AuthRepository {
         name: name,
         hobby: hobby,
       );
-      return ApiReturnValue(value: valueSignUp);
+      return ApiReturnValue(value: valueSignUp.toEntity());
     } catch (e) {
       return ApiReturnValue(message: e.toString());
     }

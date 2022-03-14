@@ -1,6 +1,7 @@
 import 'package:airplane/core/values/values.dart';
 import 'package:airplane/data/models/destination_model.dart';
 import 'package:airplane/data/repositories_impl/destination_repositories_impl.dart';
+import 'package:airplane/domain/entities/destination_entities.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -49,7 +50,7 @@ void main() {
         expect(
           result,
           equals(
-            ApiReturnValue<List<DestinationModel>>(value: tDestinationList),
+            ApiReturnValue<List<DestinationEntities>>(value: tDestinationList),
           ),
         );
       },
@@ -69,7 +70,7 @@ void main() {
         expect(
           result,
           equals(
-            ApiReturnValue<List<DestinationModel>>(
+            ApiReturnValue<List<DestinationEntities>>(
               message: Exception('error').toString(),
             ),
           ),

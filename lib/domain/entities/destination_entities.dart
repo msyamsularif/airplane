@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import 'package:airplane/data/models/destination_model.dart';
+
 class DestinationEntities extends Equatable {
   final String id;
   final String name;
@@ -16,7 +18,7 @@ class DestinationEntities extends Equatable {
     this.rating = 0.0,
     this.price = 0,
   });
-  
+
   @override
   List<Object?> get props => [
         id,
@@ -44,4 +46,13 @@ class DestinationEntities extends Equatable {
       price: price ?? this.price,
     );
   }
+
+  DestinationModel toModel() => DestinationModel(
+        id: id,
+        name: name,
+        city: city,
+        imageUrl: imageUrl,
+        rating: rating,
+        price: price,
+      );
 }
