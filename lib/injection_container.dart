@@ -1,7 +1,3 @@
-import 'package:airplane/domain/repositories/auth_repositories.dart';
-import 'package:airplane/domain/repositories/destination_repositories.dart';
-import 'package:airplane/domain/repositories/transaction_repositories.dart';
-import 'package:airplane/domain/repositories/user_repositories.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
@@ -15,6 +11,10 @@ import 'data/repositories_impl/auth_repositories_impl.dart';
 import 'data/repositories_impl/destination_repositories_impl.dart';
 import 'data/repositories_impl/transaction_repositories_impl.dart';
 import 'data/repositories_impl/user_repositories_impl.dart';
+import 'domain/repositories/auth_repositories.dart';
+import 'domain/repositories/destination_repositories.dart';
+import 'domain/repositories/transaction_repositories.dart';
+import 'domain/repositories/user_repositories.dart';
 import 'presentation/cubits/auth/auth_cubit.dart';
 import 'presentation/cubits/destination/destination_cubit.dart';
 import 'presentation/cubits/page/page_cubit.dart';
