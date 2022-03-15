@@ -15,6 +15,12 @@ This project is one of the online courses from BuildWithAngga. Then made changes
   git clone https://github.com/msyamsularif/airplane.git
 ```
 
+Flutter version
+
+```bash
+  flutter SDK 2.8.0
+```
+
 Run flutter project
 
 ```bash
