@@ -42,6 +42,6 @@ To use package mockito
 
 
 ## 🔗 Links
-[![portfolio](https://img.shields.io/badge/github-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/msyamsularif)
+[![portfolio](https://img.shields.io/badge/github-000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/msyamsularif)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/muhammad-syamsul-arif-300b911a0/)
 [![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/m_syamsularif?t=zBYmqxSVhJ-ZDy4H1Pkt5A&s=08)
