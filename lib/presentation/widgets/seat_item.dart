@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../shared/theme.dart';
+import '../../core/shared/theme.dart';
 import '../cubits/seat/seat_cubit.dart';
 
 class SeatItem extends StatelessWidget {

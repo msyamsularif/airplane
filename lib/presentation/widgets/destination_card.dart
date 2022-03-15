@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/shared/theme.dart';
 import '../../domain/entities/destination_entities.dart';
-import '../../shared/theme.dart';
 import '../pages/detail_page.dart';
 
 class DestinationCard extends StatelessWidget {

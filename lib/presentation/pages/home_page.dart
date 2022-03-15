@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/shared/theme.dart';
 import '../../domain/entities/destination_entities.dart';
-import '../../shared/theme.dart';
 import '../cubits/auth/auth_cubit.dart';
 import '../cubits/destination/destination_cubit.dart';
 import '../widgets/destination_card.dart';

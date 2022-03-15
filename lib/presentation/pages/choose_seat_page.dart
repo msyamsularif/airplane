@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
+import '../../core/shared/theme.dart';
 import '../../domain/entities/destination_entities.dart';
 import '../../domain/entities/transaction_entities.dart';
 import '../../domain/entities/user_entities.dart';
-import '../../shared/theme.dart';
 import '../cubits/seat/seat_cubit.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/seat_item.dart';

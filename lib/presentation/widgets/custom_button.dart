@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/theme.dart';
+import '../../core/shared/theme.dart';
 
 class CustomBottom extends StatelessWidget {
   final String title;

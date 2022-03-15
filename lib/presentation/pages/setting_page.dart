@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../shared/theme.dart';
+import '../../core/shared/theme.dart';
 import '../cubits/auth/auth_cubit.dart';
 import '../cubits/page/page_cubit.dart';
 import '../widgets/custom_button.dart';

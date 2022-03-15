@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/theme.dart';
+import '../../core/shared/theme.dart';
 
 class PhotoItem extends StatelessWidget {
   final String imageUrl;

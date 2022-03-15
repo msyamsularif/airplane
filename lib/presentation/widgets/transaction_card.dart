@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../core/shared/theme.dart';
 import '../../domain/entities/transaction_entities.dart';
-import '../../shared/theme.dart';
 import 'booking_details_item.dart';
 
 class TransactionCard extends StatelessWidget {

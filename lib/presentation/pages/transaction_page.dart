@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../shared/theme.dart';
+import '../../core/shared/theme.dart';
 import '../cubits/transaction/transaction_cubit.dart';
 import '../widgets/transaction_card.dart';
 

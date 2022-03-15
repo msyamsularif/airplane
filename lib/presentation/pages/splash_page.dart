@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../shared/theme.dart';
+import '../../core/shared/theme.dart';
 import '../cubits/auth/auth_cubit.dart';
 
 class SplashPage extends StatefulWidget {
