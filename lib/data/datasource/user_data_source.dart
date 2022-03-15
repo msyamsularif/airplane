@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../core/error/exceptions.dart';
 import '../models/user_model.dart';
 
 abstract class UserDataSource {
@@ -24,7 +25,7 @@ class UserDataSourceImpl implements UserDataSource {
 
       return user;
     } catch (e) {
-      rethrow;
+      throw ServerException(message: e.toString());
     }
   }
 
@@ -33,7 +34,7 @@ class UserDataSourceImpl implements UserDataSource {
     try {
       userReference.doc(user.id).set(user.toJson());
     } catch (e) {
-      rethrow;
+      throw ServerException(message: e.toString());
     }
   }
 
@@ -42,7 +43,7 @@ class UserDataSourceImpl implements UserDataSource {
     try {
       await userReference.doc(user.id).update(user.toJson());
     } catch (e) {
-      rethrow;
+      throw ServerException(message: e.toString());
     }
   }
 }

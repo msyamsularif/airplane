@@ -1,7 +1,9 @@
-import 'package:airplane/core/values/values.dart';
+import 'package:airplane/core/constanta/constanta.dart';
+import 'package:airplane/core/error/failures.dart';
 import 'package:airplane/data/models/destination_model.dart';
 import 'package:airplane/presentation/cubits/destination/destination_cubit.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -45,7 +47,7 @@ void main() {
       'should emits [DestinationLoading, DestinationSuccess] when data is gotten successfully.',
       build: () {
         when(mockDestinationRepository.fetchDestinations())
-            .thenAnswer((_) async => ApiReturnValue(value: tDestinationList));
+            .thenAnswer((_) async => Right(tDestinationList));
 
         return destinationCubit;
       },
@@ -60,14 +62,14 @@ void main() {
       'should emits [AuthFailed] when get data is unsuccessful.',
       build: () {
         when(mockDestinationRepository.fetchDestinations())
-            .thenThrow(Exception('error'));
+            .thenAnswer((_) async => Left(ServerFailure()));
 
         return destinationCubit;
       },
       act: (bloc) => bloc.fetchDestinations(),
       expect: () => <DestinationState>[
         DestinationLoading(),
-        DestinationFailed(errorMessage: Exception('error').toString()),
+        const DestinationFailed(errorMessage: serverFailureMessage),
       ],
     );
   });

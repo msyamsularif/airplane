@@ -1,11 +1,13 @@
-import '../../core/values/values.dart';
+import 'package:dartz/dartz.dart';
+
+import '../../core/error/failures.dart';
 import '../entities/transaction_entities.dart';
 
 abstract class TransactionRepository {
-  Future<void> createTransaction({
+  Future<Either<Failure, void>> createTransaction({
     required TransactionEntities transaction,
   });
-  Future<ApiReturnValue<List<TransactionEntities>>> fetchTransactions({
+  Future<Either<Failure, List<TransactionEntities>>> fetchTransactions({
     required String userId,
   });
 }

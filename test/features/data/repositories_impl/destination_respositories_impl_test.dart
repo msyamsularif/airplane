@@ -1,7 +1,8 @@
-import 'package:airplane/core/values/values.dart';
+import 'package:airplane/core/error/exceptions.dart';
+import 'package:airplane/core/error/failures.dart';
 import 'package:airplane/data/models/destination_model.dart';
 import 'package:airplane/data/repositories_impl/destination_repositories_impl.dart';
-import 'package:airplane/domain/entities/destination_entities.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -47,34 +48,22 @@ void main() {
         final result = await repository.fetchDestinations();
         // assert
         verify(mocDataSource.fetchDestinations());
-        expect(
-          result,
-          equals(
-            ApiReturnValue<List<DestinationEntities>>(value: tDestinationList),
-          ),
-        );
+        expect(result, equals(Right(tDestinationList)));
       },
     );
 
     test(
-      'should return ApiReturnValue type throw',
+      'should return ServerFailure type throw',
       () async {
         // arrange
-        when(mocDataSource.fetchDestinations()).thenThrow(Exception('error'));
+        when(mocDataSource.fetchDestinations()).thenThrow(ServerException());
 
         // act
         final result = await repository.fetchDestinations();
 
         // assert
         verify(mocDataSource.fetchDestinations());
-        expect(
-          result,
-          equals(
-            ApiReturnValue<List<DestinationEntities>>(
-              message: Exception('error').toString(),
-            ),
-          ),
-        );
+        expect(result, equals(Left(ServerFailure())));
       },
     );
   });

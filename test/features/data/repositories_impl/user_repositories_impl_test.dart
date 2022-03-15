@@ -1,7 +1,9 @@
-import 'package:airplane/core/values/values.dart';
+import 'package:airplane/core/constanta/constanta.dart';
+import 'package:airplane/core/error/exceptions.dart';
+import 'package:airplane/core/error/failures.dart';
 import 'package:airplane/data/models/user_model.dart';
 import 'package:airplane/data/repositories_impl/user_repositories_impl.dart';
-import 'package:airplane/domain/entities/user_entities.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -26,7 +28,7 @@ void main() {
   group('get user by id', () {
     const tUseId = '1';
     test(
-      'should return ApiReturnValue type User Model',
+      'should return User Model',
       () async {
         // arrange
         when(mocDataSource.getUserById(id: tUseId))
@@ -37,19 +39,18 @@ void main() {
 
         // assert
         verify(mocDataSource.getUserById(id: tUseId));
-        expect(
-            result, equals(const ApiReturnValue<UserEntities>(value: tUserModel)));
+        expect(result, equals(const Right(tUserModel)));
       },
     );
 
     test(
-      'should return ApiReturnValue type throw',
+      'should return ServerFailure type throw',
       () async {
         const tUseId = '1';
 
         // arrange
         when(mocDataSource.getUserById(id: tUseId))
-            .thenThrow(Exception('error'));
+            .thenThrow(ServerException());
 
         // act
         final result = await repository.getUserById(id: tUseId);
@@ -58,9 +59,7 @@ void main() {
         verify(mocDataSource.getUserById(id: tUseId));
         expect(
           result,
-          equals(
-            ApiReturnValue<UserEntities>(message: Exception('error').toString()),
-          ),
+          equals(Left(ServerFailure(message: serverFailureMessage)))
         );
       },
     );

@@ -1,9 +1,11 @@
-import 'package:airplane/core/values/values.dart';
+import 'package:airplane/core/constanta/constanta.dart';
+import 'package:airplane/core/error/failures.dart';
 import 'package:airplane/data/models/destination_model.dart';
 import 'package:airplane/data/models/transaction_model.dart';
 import 'package:airplane/data/models/user_model.dart';
 import 'package:airplane/presentation/cubits/auth/auth_cubit.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -69,7 +71,7 @@ void main() {
         when(mockAuthRepository.signIn(
           email: tUserModel.email,
           password: '123456',
-        )).thenAnswer((_) async => const ApiReturnValue(value: tUserModel));
+        )).thenAnswer((_) async => const Right(tUserModel));
 
         return authCubit;
       },
@@ -92,15 +94,15 @@ void main() {
         when(mockAuthRepository.signIn(
           email: tUserModel.email,
           password: '123456',
-        )).thenThrow(Exception('error'));
+        )).thenAnswer((_) async => Left(ServerFailure()));
 
         return authCubit;
       },
       act: (bloc) => bloc.signIn(email: tUserModel.email, password: '123456'),
       expect: () => <AuthState>[
         AuthLoading(),
-        AuthFailed(
-          errorMessage: Exception('error').toString(),
+        const AuthFailed(
+          errorMessage: serverFailureMessage,
         ),
       ],
     );
@@ -115,7 +117,7 @@ void main() {
           password: '123456',
           name: tUserModel.name,
           hobby: tUserModel.hobby,
-        )).thenAnswer((_) async => const ApiReturnValue(value: tUserModel));
+        )).thenAnswer((_) async => const Right(tUserModel));
 
         return authCubit;
       },
@@ -147,7 +149,7 @@ void main() {
           password: '123456',
           name: tUserModel.name,
           hobby: tUserModel.hobby,
-        )).thenThrow(Exception('error'));
+        )).thenAnswer((_) async => Left(ServerFailure()));
 
         return authCubit;
       },
@@ -159,8 +161,8 @@ void main() {
       ),
       expect: () => <AuthState>[
         AuthLoading(),
-        AuthFailed(
-          errorMessage: Exception('error').toString(),
+        const AuthFailed(
+          errorMessage: serverFailureMessage,
         ),
       ],
     );
@@ -169,7 +171,11 @@ void main() {
   group('sign out auth cubit', () {
     blocTest<AuthCubit, AuthState>(
       'should emits [AuthLoading, AuthInitial] when data is gotten successfully.',
-      build: () => authCubit,
+      build: () {
+        when(mockAuthRepository.signOut())
+            .thenAnswer((_) async => const Right(null));
+        return authCubit;
+      },
       act: (bloc) => bloc.signOut(),
       expect: () => <AuthState>[AuthLoading(), AuthInitial()],
       verify: (bloc) {
@@ -180,15 +186,16 @@ void main() {
     blocTest<AuthCubit, AuthState>(
       'should emits [AuthFailed] when get data is unsuccessful.',
       build: () {
-        when(mockAuthRepository.signOut()).thenThrow(Exception('error'));
+        when(mockAuthRepository.signOut())
+            .thenAnswer((_) async => Left(ServerFailure()));
 
         return authCubit;
       },
       act: (bloc) => bloc.signOut(),
       expect: () => <AuthState>[
         AuthLoading(),
-        AuthFailed(
-          errorMessage: Exception('error').toString(),
+        const AuthFailed(
+          errorMessage: serverFailureMessage,
         ),
       ],
     );
@@ -199,7 +206,7 @@ void main() {
       'should emits [AuthLoading, AuthSuccess] when data is gotten successfully.',
       build: () {
         when(mockUserRepository.getUserById(id: tUserModel.id))
-            .thenAnswer((_) async => const ApiReturnValue(value: tUserModel));
+            .thenAnswer((_) async => const Right(tUserModel));
 
         return authCubit;
       },
@@ -217,16 +224,14 @@ void main() {
       'should emits [AuthFailed] when get data is unsuccessful.',
       build: () {
         when(mockUserRepository.getUserById(id: tUserModel.id))
-            .thenThrow(Exception('error'));
+            .thenAnswer((_) async => Left(ServerFailure()));
 
         return authCubit;
       },
       act: (bloc) => bloc.getCurrentUser(id: tUserModel.id),
       expect: () => <AuthState>[
         AuthLoading(),
-        AuthFailed(
-          errorMessage: Exception('error').toString(),
-        ),
+        const AuthFailed(errorMessage: serverFailureMessage)
       ],
     );
   });
@@ -237,7 +242,12 @@ void main() {
     final tNewUserModel = tTransactionModel.user.copyWith(balance: paid);
     blocTest<AuthCubit, AuthState>(
       'should emits [AuthLoading, AuthSuccess] when current balance user not less than grand total transaction.',
-      build: () => authCubit,
+      build: () {
+        when(mockUserRepository.updateUser(user: tNewUserModel))
+            .thenAnswer((realInvocation) async => const Right(null));
+
+        return authCubit;
+      },
       act: (bloc) => bloc.updateBalance(transaction: tTransactionModel),
       expect: () => <AuthState>[
         AuthLoading(),
@@ -265,15 +275,14 @@ void main() {
     blocTest<AuthCubit, AuthState>(
       'should emits [AuthFailed] when get data is unsuccessful.',
       build: () {
-        when(mockUserRepository.updateUser(user: tNewUserModel)).thenThrow(Exception('error'));
+        when(mockUserRepository.updateUser(user: tNewUserModel))
+            .thenAnswer((_) async => Left(ServerFailure()));
         return authCubit;
       },
       act: (bloc) => bloc.updateBalance(transaction: tTransactionModel),
       expect: () => <AuthState>[
         AuthLoading(),
-        AuthFailed(
-          errorMessage: Exception('error').toString(),
-        ),
+        const AuthFailed(errorMessage: serverFailureMessage)
       ],
     );
   });

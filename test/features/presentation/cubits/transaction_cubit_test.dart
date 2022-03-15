@@ -1,10 +1,12 @@
-import 'package:airplane/core/values/values.dart';
+import 'package:airplane/core/constanta/constanta.dart';
+import 'package:airplane/core/error/failures.dart';
 import 'package:airplane/data/models/destination_model.dart';
 import 'package:airplane/data/models/transaction_model.dart';
 import 'package:airplane/data/models/user_model.dart';
 import 'package:airplane/domain/entities/transaction_entities.dart';
 import 'package:airplane/presentation/cubits/transaction/transaction_cubit.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -60,7 +62,13 @@ void main() {
   group('create transaction in cubit', () {
     blocTest<TransactionCubit, TransactionState>(
       'should emits [TransactionLoading, TransactionSuccess] when data is gotten successfully.',
-      build: () => transactionCubit,
+      build: () {
+        when(mockTransactionRepository.createTransaction(
+                transaction: tTransactionModel))
+            .thenAnswer((_) async => const Right(null));
+
+        return transactionCubit;
+      },
       act: (bloc) => bloc.createTransaction(transaction: tTransactionModel),
       expect: () => <TransactionState>[
         TransactionLoading(),
@@ -78,14 +86,14 @@ void main() {
       build: () {
         when(mockTransactionRepository.createTransaction(
           transaction: tTransactionModel,
-        )).thenThrow(Exception('error'));
+        )).thenAnswer((_) async => Left(ServerFailure()));
 
         return transactionCubit;
       },
       act: (bloc) => bloc.createTransaction(transaction: tTransactionModel),
       expect: () => <TransactionState>[
         TransactionLoading(),
-        TransactionFailed(errorMessage: Exception('error').toString()),
+        const TransactionFailed(errorMessage: serverFailureMessage),
       ],
     );
   });
@@ -96,8 +104,7 @@ void main() {
       build: () {
         when(mockTransactionRepository.fetchTransactions(
           userId: tTransactionModel.user.id,
-        )).thenAnswer(
-            (_) async => ApiReturnValue(value: tListTransactionModel));
+        )).thenAnswer((_) async => Right(tListTransactionModel));
 
         return transactionCubit;
       },
@@ -118,14 +125,14 @@ void main() {
       build: () {
         when(mockTransactionRepository.fetchTransactions(
           userId: tTransactionModel.user.id,
-        )).thenThrow(Exception('error'));
+        )).thenAnswer((_) async => Left(ServerFailure()));
 
         return transactionCubit;
       },
       act: (bloc) => bloc.fetchTransactions(userId: tTransactionModel.user.id),
       expect: () => <TransactionState>[
         TransactionLoading(),
-        TransactionFailed(errorMessage: Exception('error').toString()),
+        const TransactionFailed(errorMessage: serverFailureMessage),
       ],
     );
   });

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../core/error/exceptions.dart';
 import '../models/destination_model.dart';
 
 abstract class DestinationDataSource {
@@ -26,7 +27,7 @@ class DestinationDataSourceImpl implements DestinationDataSource {
 
       return destinations;
     } catch (e) {
-      rethrow;
+      throw ServerException(message: e.toString());
     }
   }
 }

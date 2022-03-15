@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../core/error/exceptions.dart';
 import '../models/transaction_model.dart';
 
 abstract class TransactionDataSource {
@@ -23,7 +24,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
     try {
       await transactionReference.add(transaction.toJson());
     } catch (e) {
-      rethrow;
+      throw ServerException(message: e.toString());
     }
   }
 
@@ -46,7 +47,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
 
       return filterTransaction;
     } catch (e) {
-      rethrow;
+      throw ServerException(message: e.toString());
     }
   }
 }

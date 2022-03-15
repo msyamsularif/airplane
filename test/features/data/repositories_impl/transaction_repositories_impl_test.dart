@@ -1,9 +1,10 @@
-import 'package:airplane/core/values/values.dart';
+import 'package:airplane/core/error/exceptions.dart';
+import 'package:airplane/core/error/failures.dart';
 import 'package:airplane/data/models/destination_model.dart';
 import 'package:airplane/data/models/transaction_model.dart';
 import 'package:airplane/data/models/user_model.dart';
 import 'package:airplane/data/repositories_impl/transaction_repositories_impl.dart';
-import 'package:airplane/domain/entities/transaction_entities.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -104,35 +105,23 @@ void main() {
 
         // assert
         verify(mocDataSource.fetchTransactions(userId: tUserId));
-        expect(
-          result,
-          equals(ApiReturnValue<List<TransactionEntities>>(
-            value: tTransactionUserModelsList,
-          )),
-        );
+        expect(result, equals(Right(tTransactionUserModelsList)));
       },
     );
 
     test(
-      'should return ApiReturnValue type throw',
+      'should return ServerFailure type throw',
       () async {
         // arrange
         when(mocDataSource.fetchTransactions(userId: tUserId))
-            .thenThrow(Exception('error'));
+            .thenThrow(ServerException());
 
         // act
         final result = await repository.fetchTransactions(userId: tUserId);
 
         // assert
         verify(mocDataSource.fetchTransactions(userId: tUserId));
-        expect(
-          result,
-          equals(
-            ApiReturnValue<List<TransactionEntities>>(
-              message: Exception('error').toString(),
-            ),
-          ),
-        );
+        expect(result, equals(Left(ServerFailure())));
       },
     );
   });

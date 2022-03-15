@@ -1,6 +1,8 @@
-import '../../core/values/values.dart';
+import 'package:dartz/dartz.dart';
+
+import '../../core/error/failures.dart';
 import '../entities/destination_entities.dart';
 
 abstract class DestinationRepository {
-  Future<ApiReturnValue<List<DestinationEntities>>> fetchDestinations();
+  Future<Either<Failure, List<DestinationEntities>>> fetchDestinations();
 }

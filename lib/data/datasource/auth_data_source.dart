@@ -1,3 +1,4 @@
+import 'package:airplane/core/error/exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/user_model.dart';
@@ -41,7 +42,7 @@ class AuthDataSourceImpl implements AuthDataSource {
 
       return user;
     } catch (e) {
-      rethrow;
+      throw ServerException(message: e.toString());
     }
   }
 
@@ -50,7 +51,7 @@ class AuthDataSourceImpl implements AuthDataSource {
     try {
       await firebaseAuth.signOut();
     } catch (e) {
-      rethrow;
+      throw ServerException(message: e.toString());
     }
   }
 
@@ -80,7 +81,7 @@ class AuthDataSourceImpl implements AuthDataSource {
 
       return user;
     } catch (e) {
-      rethrow;
+      throw ServerException(message: e.toString());
     }
   }
 }

@@ -1,7 +1,8 @@
-import 'package:airplane/core/values/values.dart';
+import 'package:airplane/core/error/exceptions.dart';
+import 'package:airplane/core/error/failures.dart';
 import 'package:airplane/data/models/user_model.dart';
 import 'package:airplane/data/repositories_impl/auth_repositories_impl.dart';
-import 'package:airplane/domain/entities/user_entities.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -39,17 +40,16 @@ void main() {
         // assert
         verify(
             mocDataSource.signIn(email: tUserModel.email, password: '123456'));
-        expect(result,
-            equals(ApiReturnValue<UserEntities>(value: tUserModel.toEntity())));
+        expect(result, equals(Right(tUserModel.toEntity())));
       },
     );
 
     test(
-      'should return ApiReturnValue type throw',
+      'should return ServerFailure type throw',
       () async {
         // arrange
         when(mocDataSource.signIn(email: tUserModel.email, password: '123456'))
-            .thenThrow(Exception('error'));
+            .thenThrow(ServerException());
 
         // act
         final result = await repository.signIn(
@@ -59,15 +59,9 @@ void main() {
 
         // assert
         verify(
-            mocDataSource.signIn(email: tUserModel.email, password: '123456'));
-
-        expect(
-          result,
-          equals(
-            ApiReturnValue<UserEntities>(
-                message: Exception('error').toString()),
-          ),
+          mocDataSource.signIn(email: tUserModel.email, password: '123456'),
         );
+        expect(result, equals(Left(ServerFailure())));
       },
     );
   });
@@ -124,15 +118,12 @@ void main() {
           name: tUserModel.name,
           hobby: tUserModel.hobby,
         ));
-        expect(
-          result,
-          equals(ApiReturnValue<UserEntities>(value: tUserModel.toEntity())),
-        );
+        expect(result, equals(Right(tUserModel.toEntity())));
       },
     );
 
     test(
-      'should return ApiReturnValue type throw',
+      'should return ServerFailure type throw',
       () async {
         // arrange
         when(mocDataSource.signUp(
@@ -140,7 +131,7 @@ void main() {
           password: '123456',
           name: tUserModel.name,
           hobby: tUserModel.hobby,
-        )).thenThrow(Exception('error'));
+        )).thenThrow(ServerException());
 
         // act
         final result = await repository.signUp(
@@ -157,13 +148,7 @@ void main() {
           name: tUserModel.name,
           hobby: tUserModel.hobby,
         ));
-        expect(
-          result,
-          equals(
-            ApiReturnValue<UserEntities>(
-                message: Exception('error').toString()),
-          ),
-        );
+        expect(result, equals(Left(ServerFailure())));
       },
     );
   });
