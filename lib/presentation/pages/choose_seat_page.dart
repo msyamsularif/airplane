@@ -433,6 +433,7 @@ class ChooseSeatPage extends StatelessWidget {
                         builder: (_) {
                           return CheckoutPage(
                             transaction: TransactionEntities(
+                              id: user.id,
                               user: user,
                               destination: destination,
                               amountOfTravelers: state.length,

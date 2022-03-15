@@ -14,17 +14,10 @@ class TransactionCubit extends Cubit<TransactionState> {
         super(TransactionInitial());
 
   void createTransaction({required TransactionEntities transaction}) async {
-    // try {
-    //   emit(TransactionLoading());
-    //   await _transactionRepository.createTransaction(transaction: transaction);
-    //   emit(const TransactionSuccess(transaction: []));
-    // } catch (e) {
-    //   emit(TransactionFailed(errorMessage: e.toString()));
-    // }
-
     emit(TransactionLoading());
     final transactionOrFailure = await _transactionRepository.createTransaction(
-        transaction: transaction);
+      transaction: transaction,
+    );
 
     transactionOrFailure.fold(
         (failure) => emit(
@@ -34,20 +27,6 @@ class TransactionCubit extends Cubit<TransactionState> {
   }
 
   void fetchTransactions({required String userId}) async {
-    // try {
-    //   emit(TransactionLoading());
-
-    //   final transactions =
-    //       await _transactionRepository.fetchTransactions(userId: userId);
-    //   final sortedTransaction = await sortedTransactionByDateTime(
-    //     transaction: transactions.value!,
-    //   );
-
-    //   emit(TransactionSuccess(transaction: sortedTransaction));
-    // } catch (e) {
-    //   emit(TransactionFailed(errorMessage: e.toString()));
-    // }
-
     emit(TransactionLoading());
 
     final transactionsOrFailure =

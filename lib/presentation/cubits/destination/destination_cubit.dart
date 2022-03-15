@@ -14,13 +14,6 @@ class DestinationCubit extends Cubit<DestinationState> {
         super(DestinationInitial());
 
   void fetchDestinations() async {
-    // try {
-    //   emit(DestinationLoading());
-    //   final destinations = await _destinationRepository.fetchDestinations();
-    //   emit(DestinationSuccess(destinations: destinations.value!));
-    // } catch (e) {
-    //   emit(DestinationFailed(errorMessage: e.toString()));
-    // }
     emit(DestinationLoading());
     final destinationsOrFailure =
         await _destinationRepository.fetchDestinations();
