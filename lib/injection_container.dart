@@ -55,21 +55,28 @@ Future<void> init() async {
 
   // service locator repository
   sl.registerLazySingleton<UserRepository>(
-      () => UserRepositoryImpl(userDataSource: sl()));
+    () => UserRepositoryImpl(userDataSource: sl()),
+  );
   sl.registerLazySingleton<AuthRepository>(
-      () => AuthRepositoryImpl(authDataSource: sl()));
+    () => AuthRepositoryImpl(authDataSource: sl()),
+  );
   sl.registerLazySingleton<DestinationRepository>(
-      () => DestinationRepositoryImpl(destinationDataSource: sl()));
+    () => DestinationRepositoryImpl(destinationDataSource: sl()),
+  );
   sl.registerLazySingleton<TransactionRepository>(
-      () => TransactionRepositoryImpl(transactionDataSource: sl()));
+    () => TransactionRepositoryImpl(transactionDataSource: sl()),
+  );
 
   // service locator cubit
   sl.registerFactory<PageCubit>(() => PageCubit());
   sl.registerFactory<AuthCubit>(
-      () => AuthCubit(authRepository: sl(), userRepository: sl()));
+    () => AuthCubit(authRepository: sl(), userRepository: sl()),
+  );
   sl.registerFactory<DestinationCubit>(
-      () => DestinationCubit(destinationRepository: sl()));
+    () => DestinationCubit(destinationRepository: sl()),
+  );
   sl.registerFactory<SeatCubit>(() => SeatCubit());
   sl.registerFactory<TransactionCubit>(
-      () => TransactionCubit(transactionRepository: sl()));
+    () => TransactionCubit(transactionRepository: sl()),
+  );
 }
