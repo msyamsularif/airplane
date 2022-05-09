@@ -1,7 +1,10 @@
+import 'package:airplane/core/error/catcher_report_message.dart';
+import 'package:catcher/catcher.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'core/constanta/constanta.dart';
 import 'injection_container.dart' as di;
 import 'presentation/cubits/auth/auth_cubit.dart';
 import 'presentation/cubits/destination/destination_cubit.dart';
@@ -21,7 +24,24 @@ void main() async {
   await Firebase.initializeApp();
   await di.init();
 
-  runApp(const MyApp());
+  CatcherOptions debugOptions = CatcherOptions(SilentReportMode(), [
+    DiscordHandler(
+      webHookDiscord,
+      enableDeviceParameters: true,
+      enableApplicationParameters: true,
+      enableCustomParameters: true,
+      enableStackTrace: true,
+      printLogs: true,
+      customMessageBuilder: (report) async {
+        return await buildMessage(report);
+      },
+    ),
+  ]);
+
+  Catcher(
+    rootWidget: const MyApp(),
+    debugConfig: debugOptions,
+  );
 }
 
 class MyApp extends StatefulWidget {
