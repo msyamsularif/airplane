@@ -2,6 +2,8 @@
 
 This project is one of the online courses from BuildWithAngga. Then made changes to the folder structure by applying TDD (Test Driven Development) with the concept of Clean Architecture
 
+- [X] Codemagic (CI/CD)
+
 [![Codemagic build status](https://api.codemagic.io/apps/624a9439974285acad58b711/624a9439974285acad58b710/status_badge.svg)](https://codemagic.io/apps/624a9439974285acad58b711/624a9439974285acad58b710/latest_build)
 
 ## Acknowledgements
